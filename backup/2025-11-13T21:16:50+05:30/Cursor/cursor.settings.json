@@ -1,0 +1,174 @@
+{
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
+  "explorer.confirmDelete": false,
+  "[dart]": {
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.rulers": [80],
+    "editor.selectionHighlight": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": "off"
+  },
+  "git.openRepositoryInParentFolders": "always",
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "emmet.triggerExpansionOnTab": true,
+  "workbench.settings.applyToAllProfiles": [
+    "terminal.integrated.defaultProfile.windows",
+    "editor.fontFamily",
+    "terminal.integrated.fontFamily"
+  ],
+  "workbench.tree.enableStickyScroll": false,
+  "workbench.tree.renderIndentGuides": "none",
+  "workbench.tree.indent": 10,
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "zenMode.showTabs": "none",
+  "editor.linkedEditing": true,
+  "keyboard.dispatch": "keyCode",
+  "fiveServer.browser": ["brave"],
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "tailwindCSS.emmetCompletions": true,
+  "editor.accessibilitySupport": "off",
+  "screencastMode.verticalOffset": 2,
+  "workbench.editor.enablePreview": false,
+  "files.autoSave": "afterDelay",
+  "screencastMode.keyboardOptions": {
+    "showKeybindings": false
+  },
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    },
+    "Command Prompt": {
+      "path": [
+        "${env:windir}\\Sysnative\\cmd.exe",
+        "${env:windir}\\System32\\cmd.exe"
+      ],
+      "args": [],
+      "icon": "terminal-cmd"
+    },
+    "Git Bash": {
+      "source": "Git Bash"
+    },
+    "Windows PowerShell": {
+      "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+    }
+  },
+  "editor.matchBrackets": "never",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "fiveServer.port": 3003,
+  "material-icon-theme.folders.theme": "specific",
+  "editor.guides.bracketPairs": false,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "git.autofetch": true,
+  "terminal.integrated.defaultProfile.linux": "zsh",
+  "security.workspace.trust.untrustedFiles": "open",
+  "[mdx]": {
+    "editor.defaultFormatter": "unifiedjs.vscode-mdx"
+  },
+  "mdx.trace.server.format": "json",
+  "mdx.trace.server.verbosity": "messages",
+  "mdx.server.enable": true,
+  "editor.lineNumbers": "relative",
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "explorer.confirmDragAndDrop": false,
+  "explorer.compactFolders": false,
+  "explorer.decorations.badges": false,
+  "editor.wordWrap": "on",
+  "reactSnippets.settings.importReactOnTop": false,
+  "editor.find.cursorMoveOnType": false,
+  "emmet.includeLanguages": {
+    "njk": "html",
+    "javascript": "javascriptreact"
+  },
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "terminal.integrated.env.windows": {},
+  "editor.unicodeHighlight.invisibleCharacters": false,
+  "editor.inlayHints.fontFamily": "CommitMonoDef",
+  "workbench.startupEditor": "none",
+  "editor.smoothScrolling": true,
+  "workbench.list.smoothScrolling": true,
+  "terminal.integrated.smoothScrolling": true,
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.cursorStyle": "line",
+  "workbench.productIconTheme": "bongocat",
+  "editor.semanticHighlighting.enabled": true,
+  "editor.stickyScroll.enabled": false,
+  "window.zoomLevel": 1.7,
+  "workbench.navigationControl.enabled": false,
+  "editor.cursorBlinking": "expand",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.minimap.size": "fit",
+  "editor.minimap.enabled": false,
+  "workbench.sideBar.location": "right",
+  "workbench.secondarySideBar.defaultVisibility": "hidden",
+  "editor.fontFamily": "GeistMono Nerd Font Mono",
+  "editor.fontLigatures": false,
+  "editor.guides.indentation": false,
+  "editor.cursorStyle": "line",
+  "extensions.ignoreRecommendations": true,
+  "vim.handleKeys": {
+    "<C-f>": false,
+    "<C-h>": false,
+    "<C-c>": false,
+    "<C-v>": false,
+    "<C-x>": false,
+    "<C-d>": false,
+    "<C-j>": false,
+    "<C-p>": false,
+    "<C-w>": false,
+    "<C-k>": false
+  },
+  "vim.useSystemClipboard": true,
+  "better-comments.highlightPlainText": true,
+  "editor.formatOnSave": true,
+  "github.copilot.enable": {
+    "*": false,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false
+  },
+  "workbench.iconTheme": "vscode-icons",
+  "editor.fontSize": 16,
+  "chat.commandCenter.enabled": false,
+  "breadcrumbs.enabled": false,
+  "window.menuBarVisibility": "compact",
+  "files.associations": {
+    "*.py": "python"
+  },
+  "workbench.colorCustomizations": {},
+  "workbench.colorTheme": "Andromeda Night",
+  "cursor.cpp.disabledLanguages": ["plaintext", "markdown", "scminput"],
+  "cursor.composer.usageSummaryDisplay": "always",
+  "window.titleBarStyle": "native",
+  "window.commandCenter": true,
+  "workbench.layoutControl.enabled": false,
+  "diffEditor.ignoreTrimWhitespace": false
+}
