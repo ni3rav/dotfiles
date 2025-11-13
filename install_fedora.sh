@@ -136,6 +136,40 @@ curl -fsSL https://raw.githubusercontent.com/ni3rav/helium-installer/main/instal
 log_info "Installing Brave browser..."
 curl -fsS https://dl.brave.com/install.sh | sh
 
+# Install Zen browser
+log_info "Installing Zen browser..."
+sudo dnf copr enable sneexy/zen-browser
+sudo dnf install zen-browser
+
+# Install Docker Desktop
+log_info "Installing Docker Desktop..."
+# Install Docker Engine prerequisites
+sudo dnf install -y dnf-plugins-core
+sudo dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+sudo dnf install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Install Docker Desktop
+sudo dnf install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Enable and start Docker service
+sudo systemctl enable docker
+sudo systemctl start docker
+
+# Add user to docker group
+sudo usermod -aG docker $USER
+
+# Install and enable Flatpak
+log_info "Installing and enabling Flatpak..."
+sudo dnf install -y flatpak
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
+# Install Flatpak applications
+log_info "Installing Flatpak applications..."
+flatpak install --assumeyes flathub com.obsproject.Studio
+flatpak install --assumeyes flathub org.onlyoffice.desktopeditors
+flatpak install --assumeyes flathub com.bitwarden.desktop
+flatpak install --assumeyes flathub com.getpostman.Postman
+
 log_info "Installation completed successfully!"
 log_info "You may need to restart your shell or source your ~/.bashrc to use some tools like nvm, rust, etc."
 log_info "Installed tools:"
@@ -152,3 +186,5 @@ log_info "  - VS Code"
 log_info "  - Cursor"
 log_info "  - Brave Browser"
 log_info "  - Google Chrome"
+log_info "  - Docker Desktop"
+log_info "  - Flatpak applications: OBS Studio, OnlyOffice, Bitwarden, Postman"
