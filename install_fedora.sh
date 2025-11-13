@@ -117,6 +117,11 @@ curl -fsSL https://deno.land/install.sh | sh
 log_info "Installing Bun..."
 curl -fsSL https://bun.sh/install | bash
 
+# Install uv (Python)
+log_info "Installing uv(python)"
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+
 # Install Cursor (download and install rpm package)
 log_info "Installing Cursor code editor..."
 wget -O cursor.rpm "https://api2.cursor.sh/updates/download/golden/linux-x64-rpm/cursor/2.0"
