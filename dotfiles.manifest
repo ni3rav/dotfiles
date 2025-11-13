@@ -6,7 +6,6 @@ Code/vscode.keybindings.json|$HOME/.config/Code/User/keybindings.json
 Cursor/cursor.settings.json|$HOME/.config/Cursor/User/settings.json
 Cursor/cursor.keybindings.json|$HOME/.config/Cursor/User/keybindings.json
 zen/|$HOME/.config/zen/
-.zen/|$HOME/.zen/
 home/.zshrc|$HOME/.zshrc
 home/.gitconfig|$HOME/.gitconfig
 oh-my-posh-theme.json|$HOME/oh-my-posh/theme.json

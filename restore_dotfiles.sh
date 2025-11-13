@@ -2,23 +2,27 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+REPO_ROOT="${SCRIPT_DIR}"
 MANIFEST="${REPO_ROOT}/dotfiles.manifest"
 
 DRY_RUN=false
-timestamp="$(date +"%Y%m%d-%H%M%S")"
-BACKUP_ROOT="/timestemp/dotfiles-restore-${timestamp}"
+SNAPSHOT=""
+timestamp="$(date -Iseconds)"
+BACKUP_ROOT="${REPO_ROOT}/backup/restore-${timestamp}"
 
 usage() {
   cat <<EOF
-Usage: $(basename "$0") [--dry-run]
+Usage: $(basename "$0") [--dry-run] [--snapshot <timestamp|path>]
 
-Copies dotfiles from the repository into their target locations.
-A backup copy of any overwritten file or directory is stored under:
+Copies dotfiles from a collected snapshot into their target locations.
+Snapshots must exist under:
+  ${REPO_ROOT}/backup/<timestamp>
+Backups of overwritten files or directories are stored under:
   ${BACKUP_ROOT}
 
 Options:
   --dry-run   Show actions without applying changes.
+  --snapshot  Timestamp (folder name) or absolute path to use as source snapshot.
 EOF
 }
 
@@ -27,6 +31,10 @@ while [[ $# -gt 0 ]]; do
     --dry-run)
       DRY_RUN=true
       shift
+      ;;
+    --snapshot)
+      SNAPSHOT="$2"
+      shift 2
       ;;
     -h|--help)
       usage
@@ -45,10 +53,40 @@ if [[ ! -f "${MANIFEST}" ]]; then
   exit 1
 fi
 
-if [[ "${DRY_RUN}" == "false" ]]; then
-  mkdir -p "/timestemp"
-  mkdir -p "${BACKUP_ROOT}"
-fi
+resolve_snapshot() {
+  local requested="$1"
+  local base="${REPO_ROOT}/backup"
+
+  if [[ -n "${requested}" ]]; then
+    if [[ -d "${requested}" ]]; then
+      printf '%s' "${requested}"
+      return
+    fi
+
+    if [[ -d "${base}/${requested}" ]]; then
+      printf '%s' "${base}/${requested}"
+      return
+    fi
+
+    echo "Snapshot not found: ${requested}" >&2
+    exit 1
+  fi
+
+  if [[ ! -d "${base}" ]]; then
+    echo "No backup snapshots found under ${base}" >&2
+    exit 1
+  fi
+
+  mapfile -t snapshots < <(find "${base}" -mindepth 1 -maxdepth 1 -type d | sort)
+  if [[ ${#snapshots[@]} -eq 0 ]]; then
+    echo "No backup snapshots found under ${base}" >&2
+    exit 1
+  fi
+
+  printf '%s' "${snapshots[-1]}"
+}
+
+SNAPSHOT_ROOT="$(resolve_snapshot "${SNAPSHOT}")"
 
 expand_path() {
   local path_template="$1"
@@ -69,6 +107,13 @@ do_backup() {
 
 actions=()
 
+if [[ "${DRY_RUN}" == "true" ]]; then
+  echo "Dry run: would restore from ${SNAPSHOT_ROOT}"
+else
+  mkdir -p "${BACKUP_ROOT}"
+  echo "Restoring from snapshot: ${SNAPSHOT_ROOT}"
+fi
+
 while IFS= read -r line || [[ -n "${line}" ]]; do
   [[ -z "${line}" || "${line}" =~ ^# ]] && continue
 
@@ -80,7 +125,7 @@ while IFS= read -r line || [[ -n "${line}" ]]; do
     continue
   fi
 
-  source_path="${REPO_ROOT}/${rel_path}"
+  source_path="${SNAPSHOT_ROOT}/${rel_path}"
   target_path="$(expand_path "${target_template}")"
 
   if [[ ! -e "${source_path}" ]]; then
@@ -107,9 +152,7 @@ while IFS= read -r line || [[ -n "${line}" ]]; do
   fi
 done < "${MANIFEST}"
 
-if (( ${#actions[@]} > 0 )); then
-  printf '%s\n' "${actions[@]}"
-fi
+printf '%s\n' "${actions[@]}"
 
 if [[ "${DRY_RUN}" == "false" ]]; then
   echo "Backups stored in: ${BACKUP_ROOT}"
