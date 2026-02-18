@@ -1,0 +1,161 @@
+#!/bin/bash
+
+DOTFILES_DIR="$HOME/dotfiles"
+
+echo "Starting Fedora restore..."
+
+# ---------------------------------------------
+# Helper: run step safely
+# ---------------------------------------------
+run_step () {
+    echo
+    echo "→ $1"
+    bash -c "$2" || echo "⚠️ Failed: $1"
+}
+
+# ---------------------------------------------
+# System update
+# ---------------------------------------------
+run_step "System update" "sudo dnf update -y"
+
+# ---------------------------------------------
+# Core packages
+# ---------------------------------------------
+run_step "Installing core packages" \
+"sudo dnf install -y git curl stow flatpak zsh zoxide fzf golang"
+
+# ---------------------------------------------
+# Shell setup
+# ---------------------------------------------
+run_step "Install Oh My Zsh" \
+"RUNZSH=no CHSH=no sh -c \"\$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\""
+
+run_step "Install Oh My Posh" \
+"curl -s https://ohmyposh.dev/install.sh | bash -s"
+
+run_step "Change default shell to zsh" \
+"chsh -s \$(which zsh)"
+
+# ---------------------------------------------
+# Enable COPR repos
+# ---------------------------------------------
+run_step "Enable Zen Browser COPR" \
+"sudo dnf copr enable -y sneexy/zen-browser"
+
+run_step "Enable Ghostty COPR" \
+"sudo dnf copr enable -y scottames/ghostty"
+
+run_step "Enable Vicinae COPR" \
+"sudo dnf copr enable -y quadratech188/vicinae"
+
+# ---------------------------------------------
+# Install COPR packages
+# ---------------------------------------------
+run_step "Install Ghostty + Vicinae" \
+"sudo dnf install -y ghostty vicinae"
+
+# ---------------------------------------------
+# Flatpak apps
+# ---------------------------------------------
+run_step "Install OBS (Flatpak)" \
+"flatpak install -y flathub com.obsproject.Studio"
+
+run_step "Install Bruno (Flatpak)" \
+"flatpak install -y flathub com.usebruno.Bruno"
+
+run_step "Install Postman (Flatpak)" \
+"flatpak install -y flathub com.getpostman.Postman"
+
+# ---------------------------------------------
+# VS Code
+# ---------------------------------------------
+run_step "Import VS Code GPG key" \
+"sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc"
+
+run_step "Add VS Code repo" \
+"echo -e \"[code]
+name=Visual Studio Code
+baseurl=https://packages.microsoft.com/yumrepos/vscode
+enabled=1
+autorefresh=1
+type=rpm-md
+gpgcheck=1
+gpgkey=https://packages.microsoft.com/keys/microsoft.asc\" \
+| sudo tee /etc/yum.repos.d/vscode.repo > /dev/null"
+
+run_step "Install VS Code" \
+"sudo dnf install -y code"
+
+# ---------------------------------------------
+# Bun
+# ---------------------------------------------
+run_step "Install Bun" \
+"curl -fsSL https://bun.sh/install | bash"
+
+# ---------------------------------------------
+# Deno
+# ---------------------------------------------
+run_step "Install Deno" \
+"curl -fsSL https://deno.land/install.sh | sh"
+
+# ---------------------------------------------
+# NVM + Node
+# ---------------------------------------------
+run_step "Install NVM" \
+"curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash"
+
+run_step "Install Node via NVM" \
+"export NVM_DIR=\"$HOME/.nvm\" && \
+\. \"$NVM_DIR/nvm.sh\" && \
+nvm install 24"
+
+run_step "Enable pnpm" \
+"export NVM_DIR=\"$HOME/.nvm\" && \
+\. \"$NVM_DIR/nvm.sh\" && \
+corepack enable pnpm"
+
+# ---------------------------------------------
+# uv
+# ---------------------------------------------
+run_step "Install uv package manager" \
+"curl -LsSf https://astral.sh/uv/install.sh | sh"
+
+# ---------------------------------------------
+# Brave
+# ---------------------------------------------
+run_step "Install Brave" \
+"curl -fsS https://dl.brave.com/install.sh | sh"
+
+# ---------------------------------------------
+# Zed
+# ---------------------------------------------
+run_step "Install Zed" \
+"curl -f https://zed.dev/install.sh | sh"
+
+# ---------------------------------------------
+# Apply dotfiles
+# ---------------------------------------------
+run_step "Applying dotfiles via stow" \
+"cd \"$DOTFILES_DIR\" && stow zsh tmux git posh config fonts scripts"
+
+echo
+echo "→ dconf handled separately"
+
+# ---------------------------------------------
+# Refresh fonts
+# ---------------------------------------------
+run_step "Refresh font cache" "fc-cache -fv"
+
+# ---------------------------------------------
+# Restore GNOME dconf
+# ---------------------------------------------
+run_step "Restore GNOME settings" \
+"bash \"$DOTFILES_DIR/dconf/restore-gnome.sh\""
+
+# ---------------------------------------------
+# Done
+# ---------------------------------------------
+echo
+echo "✅ Restore finished"
+echo "Logout / login recommended."
+
