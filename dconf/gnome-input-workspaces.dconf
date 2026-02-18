@@ -1,0 +1,71 @@
+[/]
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom4/']
+rotate-video-lock-static=['<Super>o', 'XF86RotationLockToggle']
+
+[custom-keybindings/custom0]
+binding='<Super>v'
+command='vicinae deeplink vicinae://extensions/vicinae/clipboard/history'
+name='clipboard'
+
+[custom-keybindings/custom1]
+binding='<Super>space'
+command='vicinae toggle'
+name='vicinae'
+
+[custom-keybindings/custom2]
+binding='<Super>t'
+command='ghostty'
+name='terminal'
+
+[custom-keybindings/custom3]
+binding='<Super>b'
+command='brave-browser'
+name='browser'
+
+[custom-keybindings/custom4]
+binding='<Super>c'
+command='code'
+name='code'
+[/]
+maximize=['<Super>Up']
+move-to-monitor-down=['<Super><Shift>Down']
+move-to-monitor-left=['<Super><Shift>Left']
+move-to-monitor-right=['<Super><Shift>Right']
+move-to-monitor-up=['<Super><Shift>Up']
+move-to-workspace-down=['<Control><Shift><Alt>Down']
+move-to-workspace-left=['<Super><Shift>Page_Up', '<Super><Shift>KP_Prior', '<Super><Shift><Alt>Left', '<Control><Shift><Alt>Left']
+move-to-workspace-right=['<Super><Shift>Page_Down', '<Super><Shift>KP_Next', '<Super><Shift><Alt>Right', '<Control><Shift><Alt>Right']
+move-to-workspace-up=['<Control><Shift><Alt>Up']
+show-desktop=['<Super>d']
+switch-applications=@as []
+switch-applications-backward=@as []
+switch-group=['<Super>Above_Tab', '<Alt>Above_Tab']
+switch-group-backward=['<Shift><Super>Above_Tab', '<Shift><Alt>Above_Tab']
+switch-input-source=@as []
+switch-input-source-backward=@as []
+switch-panels=['<Control><Alt>Tab']
+switch-panels-backward=['<Shift><Control><Alt>Tab']
+switch-to-workspace-1=['<Super>Home']
+switch-to-workspace-last=['<Super>End']
+switch-to-workspace-left=['<Super>Page_Up', '<Super>KP_Prior', '<Super><Alt>Left', '<Control><Alt>Left']
+switch-to-workspace-right=['<Super>Page_Down', '<Super>KP_Next', '<Super><Alt>Right', '<Control><Alt>Right']
+switch-windows=['<Alt>Tab']
+switch-windows-backward=['<Shift><Alt>Tab']
+toggle-maximized=['<Alt>F10']
+unmaximize=['<Super>Down', '<Alt>F5']
+[/]
+attach-modal-dialogs=true
+dynamic-workspaces=false
+edge-tiling=true
+workspaces-only-on-primary=true
+
+[keybindings]
+cancel-input-capture=['<Super><Shift>Escape']
+toggle-tiled-left=['<Super>Left']
+toggle-tiled-right=['<Super>Right']
+
+[wayland/keybindings]
+restore-shortcuts=['<Super>Escape']
+[/]
+button-layout='appmenu:minimize,maximize,close'
+workspace-names=['1']
