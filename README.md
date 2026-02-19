@@ -10,7 +10,7 @@ cd ~/dotfiles
 stow scripts && restore-fedora
 
 # apply configs only
-stow zsh tmux git posh config fonts scripts
+stow zsh tmux git posh config fonts scripts local
 
 # restore gnome settings only
 bash ~/dotfiles/dconf/restore-gnome.sh  # logout/login required

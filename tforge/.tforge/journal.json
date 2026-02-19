@@ -1,0 +1,18 @@
+{
+  "entries": [
+    {
+      "session": "hive",
+      "script_path": "/home/ni3rav/.tforge/sessions/hive.sh",
+      "windows": 2,
+      "panes": 5,
+      "captured_at": "2026-02-15T19:45:21.355428207Z"
+    },
+    {
+      "session": "shepherd",
+      "script_path": "/home/ni3rav/.tforge/sessions/shepherd.sh",
+      "windows": 3,
+      "panes": 5,
+      "captured_at": "2026-02-15T19:45:35.472183152Z"
+    }
+  ]
+}
