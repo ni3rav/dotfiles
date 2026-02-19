@@ -12,7 +12,7 @@
     "auto_replace_emoji_shortcode": false
   },
   "edit_predictions": {
-    "provider": "copilot"
+    "provider": "none"
   },
   "agent_servers": {
     "github-copilot": {

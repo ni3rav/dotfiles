@@ -7,3 +7,9 @@
 [submodule ".oh-my-zsh/custom/plugins/zsh-vi-mode"]
 	path = .oh-my-zsh/custom/plugins/zsh-vi-mode
 	url = https://github.com/jeffreytse/zsh-vi-mode
+[submodule "tmux/themes/tokyo-night-tmux"]
+	path = tmux/themes/tokyo-night-tmux
+	url = https://github.com/joaofelipegalvao/tokyo-night-tmux
+[submodule "tmux/plugins/tmux-resurrect"]
+	path = tmux/plugins/tmux-resurrect
+	url = https://github.com/tmux-plugins/tmux-resurrect

@@ -21,7 +21,7 @@
    "theme": {
       "dark": {
          "name": "tokyo-night",
-         "icon_theme": "Qogir"
+         "icon_theme": "Tela"
       }
    },
    "launcher_window": {
@@ -37,6 +37,64 @@
                "/usr/share/applications"
             ]
          }
+      },
+      "core": {
+         "entrypoints": {
+            "about": {
+               "enabled": false
+            },
+            "documentation": {
+               "enabled": false
+            },
+            "keybind-settings": {
+               "enabled": true
+            },
+            "manage-fallback": {
+               "enabled": false
+            },
+            "oauth-token-store": {
+               "enabled": false
+            },
+            "open-config-file": {
+               "enabled": false
+            },
+            "open-default-config": {
+               "enabled": false
+            },
+            "prune-memory": {
+               "enabled": false
+            },
+            "refresh-apps": {
+               "enabled": false
+            },
+            "reload-scripts": {
+               "enabled": false
+            },
+            "report-bug": {
+               "enabled": false
+            },
+            "search-builtin-icons": {
+               "enabled": false
+            },
+            "settings": {
+               "enabled": true
+            },
+            "sponsor": {
+               "enabled": false
+            }
+         }
+      },
+      "font": {
+         "enabled": false
+      },
+      "raycast-compat": {
+         "enabled": false
+      },
+      "theme": {
+         "enabled": false
+      },
+      "wm": {
+         "enabled": false
       }
    }
 }
