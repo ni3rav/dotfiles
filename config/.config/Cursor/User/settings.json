@@ -184,4 +184,5 @@
   "diffEditor.ignoreTrimWhitespace": false,
   "symbols.hidesExplorerArrows": false,
   "workbench.colorTheme": "Andromeda Night Italic",
+  "window.commandCenter": true,
 }

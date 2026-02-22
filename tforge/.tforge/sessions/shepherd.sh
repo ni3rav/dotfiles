@@ -18,15 +18,15 @@ if tmux has-session -t "$SESSION" 2>/dev/null; then
   fi
 fi
 
-tmux new-session -d -s "shepherd" -n "apps" -c "/home/ni3rav/code/shephered/apps/web"
-tmux split-window -t "shepherd":0 -c "/home/ni3rav/code/shephered"
-tmux split-window -t "shepherd":0 -c "/home/ni3rav/code/shephered/apps/api"
+tmux new-session -d -s "shepherd" -n "apps" -c "/home/ni3rav/code/shepherd/apps/web"
+tmux split-window -t "shepherd":0 -c "/home/ni3rav/code/shepherd"
+tmux split-window -t "shepherd":0 -c "/home/ni3rav/code/shepherd/apps/api"
 tmux select-layout -t "shepherd":0 "ada3,188x46,0,0{94x46,0,0[94x18,0,0,5,94x27,0,19,6],93x46,95,0,7}"
 tmux select-pane -t "shepherd":0.2
-tmux new-window -t "shepherd" -n "packages" -c "/home/ni3rav/code/shephered/packages"
+tmux new-window -t "shepherd" -n "packages" -c "/home/ni3rav/code/shepherd/packages"
 tmux select-layout -t "shepherd":1 "d085,188x48,0,0,8"
 tmux select-pane -t "shepherd":1.0
-tmux new-window -t "shepherd" -n "git/root" -c "/home/ni3rav/code/shephered"
+tmux new-window -t "shepherd" -n "git/root" -c "/home/ni3rav/code/shepherd"
 tmux select-layout -t "shepherd":2 "d086,188x48,0,0,9"
 tmux select-pane -t "shepherd":2.0
 
