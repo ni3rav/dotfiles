@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SESSION="shepherd"
+SESSION="0"
 
 if tmux has-session -t "$SESSION" 2>/dev/null; then
   WINDOWS=$(tmux list-windows -t "$SESSION" 2>/dev/null | wc -l | tr -d ' ')
@@ -18,19 +18,22 @@ if tmux has-session -t "$SESSION" 2>/dev/null; then
   fi
 fi
 
-tmux new-session -d -s "shepherd" -n "apps" -c "/home/ni3rav/code/shepherd/apps/web"
-tmux split-window -t "shepherd":0 -c "/home/ni3rav/code/shepherd"
-tmux split-window -t "shepherd":0 -c "/home/ni3rav/code/shepherd/apps/api"
-tmux select-layout -t "shepherd":0 "ada3,188x46,0,0{94x46,0,0[94x18,0,0,5,94x27,0,19,6],93x46,95,0,7}"
-tmux select-pane -t "shepherd":0.2
-tmux new-window -t "shepherd" -n "packages" -c "/home/ni3rav/code/shepherd/packages"
-tmux select-layout -t "shepherd":1 "d085,188x48,0,0,8"
-tmux select-pane -t "shepherd":1.0
-tmux new-window -t "shepherd" -n "git/root" -c "/home/ni3rav/code/shepherd"
-tmux select-layout -t "shepherd":2 "d086,188x48,0,0,9"
-tmux select-pane -t "shepherd":2.0
+tmux new-session -d -s "0" -n "web/api/compose" -c "/home/ni3rav/code/shepherd/apps/web"
+tmux split-window -t "0":0 -c "/home/ni3rav/code/shepherd"
+tmux split-window -t "0":0 -c "/home/ni3rav/code/shepherd/apps/api"
+tmux select-layout -t "0":0 "fbdf,209x50,0,0{104x50,0,0[104x25,0,0,0,104x24,0,26,4],104x50,105,0,3}"
+tmux select-pane -t "0":0.2
+tmux new-window -t "0" -n "packages" -c "/home/ni3rav/code/shepherd/packages/logger"
+tmux split-window -t "0":1 -c "/home/ni3rav/code/shepherd/packages/whistle"
+tmux split-window -t "0":1 -c "/home/ni3rav/code/shepherd/packages/crook"
+tmux split-window -t "0":1 -c "/home/ni3rav/code/shepherd/packages/types"
+tmux select-layout -t "0":1 "d35b,209x50,0,0{104x50,0,0[104x25,0,0,1,104x24,0,26,8],104x50,105,0[104x25,105,0,5,104x24,105,26,7]}"
+tmux select-pane -t "0":1.0
+tmux new-window -t "0" -n "git" -c "/home/ni3rav/code/shepherd"
+tmux select-layout -t "0":2 "b11f,209x50,0,0,2"
+tmux select-pane -t "0":2.0
 
-tmux select-window -t "shepherd":0
+tmux select-window -t "0":0
 if [ -n "${TMUX:-}" ]; then
   tmux switch-client -t "$SESSION"
 else
