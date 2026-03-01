@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SESSION="0"
+SESSION="shepherd"
 
 if tmux has-session -t "$SESSION" 2>/dev/null; then
   WINDOWS=$(tmux list-windows -t "$SESSION" 2>/dev/null | wc -l | tr -d ' ')
