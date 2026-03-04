@@ -183,6 +183,6 @@
   "cursor.composer.usageSummaryDisplay": "always",
   "diffEditor.ignoreTrimWhitespace": false,
   "symbols.hidesExplorerArrows": false,
-  "workbench.colorTheme": "Andromeda Night Italic",
+  "workbench.colorTheme": "Srcery",
   "window.commandCenter": true,
 }
