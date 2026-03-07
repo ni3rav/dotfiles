@@ -38,6 +38,11 @@
             ]
          }
       },
+      "clipboard": {
+         "preferences": {
+            "monitoring": true
+         }
+      },
       "core": {
          "entrypoints": {
             "about": {
