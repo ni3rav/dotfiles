@@ -38,3 +38,5 @@ esac
 export PATH="$HOME/.opencode/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 
+# bun completions
+[ -s "/home/ni3rav/.bun/_bun" ] && source "/home/ni3rav/.bun/_bun"

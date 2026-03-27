@@ -1,0 +1,10 @@
+[[manager.prepend_keymap]]
+on   = [ "z" ]
+run  = "shell 'zoxide query -i' --block --reveal"
+desc = "Zoxide interactive search (global)"
+
+[[manager.prepend_keymap]]
+on   = [ "Z" ]
+run  = "shell 'fd -H . ~ | fzf --tmux' --block --reveal"
+desc = "Fuzzy search from home directory"
+

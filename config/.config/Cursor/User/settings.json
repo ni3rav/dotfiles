@@ -185,4 +185,5 @@
   "symbols.hidesExplorerArrows": false,
   "workbench.colorTheme": "Bearded Theme Stained Blue",
   "window.commandCenter": true,
+  "workbench.iconTheme": "catppuccin-mocha",
 }
