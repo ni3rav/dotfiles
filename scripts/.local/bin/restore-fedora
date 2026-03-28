@@ -48,11 +48,14 @@ run_step "Enable Ghostty COPR" \
 run_step "Enable Vicinae COPR" \
 "sudo dnf copr enable -y quadratech188/vicinae"
 
+run_step "Enable Helium COPR" \
+"sudo dnf copr enable -y v8v88v8v88/helium"
+
 # ---------------------------------------------
 # Install COPR packages
 # ---------------------------------------------
-run_step "Install Ghostty + Vicinae" \
-"sudo dnf install -y ghostty vicinae"
+run_step "Install Ghostty + Vicinae + Helium + Zen" \
+"sudo dnf install -y ghostty vicinae zen-browser helium"
 
 # ---------------------------------------------
 # Flatpak apps
@@ -60,11 +63,8 @@ run_step "Install Ghostty + Vicinae" \
 run_step "Install OBS (Flatpak)" \
 "flatpak install -y flathub com.obsproject.Studio"
 
-run_step "Install Bruno (Flatpak)" \
-"flatpak install -y flathub com.usebruno.Bruno"
-
-run_step "Install Postman (Flatpak)" \
-"flatpak install -y flathub com.getpostman.Postman"
+run_step "Install OnlyOffice (Flatpak)" \
+"flatpak install -y flathub org.onlyoffice.desktopeditors"
 
 # ---------------------------------------------
 # VS Code
@@ -133,6 +133,18 @@ run_step "Install Zed" \
 "curl -f https://zed.dev/install.sh | sh"
 
 # ---------------------------------------------
+# Yaak
+# ---------------------------------------------
+run_step "Install Yaak" \
+"sudo dnf install -y https://yaak.app/releases/v2026.3.1/rpm-x86_64/yaak-2026.3.1-1.x86_64.rpm"
+
+# ---------------------------------------------
+# Cursor
+# ---------------------------------------------
+run_step "Install Cursor" \
+"sudo dnf install -y https://api2.cursor.sh/updates/download/golden/linux-x64-rpm/cursor/2.6"
+
+# ---------------------------------------------
 # Apply dotfiles
 # ---------------------------------------------
 run_step "Applying dotfiles via stow" \
@@ -149,8 +161,8 @@ run_step "Refresh font cache" "fc-cache -fv"
 # ---------------------------------------------
 # Restore GNOME dconf
 # ---------------------------------------------
-run_step "Restore GNOME settings" \
-"bash \"$DOTFILES_DIR/dconf/restore-gnome.sh\""
+# run_step "Restore GNOME settings" \
+# "bash \"$DOTFILES_DIR/dconf/restore-gnome.sh\""
 
 # ---------------------------------------------
 # Done
