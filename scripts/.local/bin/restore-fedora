@@ -16,46 +16,46 @@ run_step () {
 # ---------------------------------------------
 # System update
 # ---------------------------------------------
-run_step "System update" "sudo dnf update -y"
-
-# ---------------------------------------------
-# Core packages
-# ---------------------------------------------
-run_step "Installing core packages" \
-"sudo dnf install -y git curl stow flatpak zsh zoxide fzf golang"
-
-# ---------------------------------------------
-# Shell setup
-# ---------------------------------------------
-run_step "Install Oh My Zsh" \
-"RUNZSH=no CHSH=no sh -c \"\$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\""
-
-run_step "Install Oh My Posh" \
-"curl -s https://ohmyposh.dev/install.sh | bash -s"
-
-run_step "Change default shell to zsh" \
-"chsh -s \$(which zsh)"
+# runSystem update" "sudo dnf update -y"
+#
+# # ---------------------------------------------
+# # Core packages
+# # ---------------------------------------------
+# run_step "Installing core packages" \
+# "sudo dnf install -y git curl stow flatpak zsh zoxide fzf golang"
+#
+# # ---------------------------------------------
+# # Shell setup
+# # ---------------------------------------------
+# run_step "Install Oh My Zsh" \
+# "RUNZSH=no CHSH=no sh -c \"\$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)\""
+#
+# run_step "Install Oh My Posh" \
+# "curl -s https://ohmyposh.dev/install.sh | bash -s"
+#
+# run_step "Change default shell to zsh" \
+# "chsh -s \$(which zsh)"
 
 # ---------------------------------------------
 # Enable COPR repos
 # ---------------------------------------------
 run_step "Enable Zen Browser COPR" \
-"sudo dnf copr enable -y sneexy/zen-browser"
-
-run_step "Enable Ghostty COPR" \
-"sudo dnf copr enable -y scottames/ghostty"
-
-run_step "Enable Vicinae COPR" \
-"sudo dnf copr enable -y quadratech188/vicinae"
-
-run_step "Enable Helium COPR" \
-"sudo dnf copr enable -y v8v88v8v88/helium"
-
-# ---------------------------------------------
-# Install COPR packages
-# ---------------------------------------------
-run_step "Install Ghostty + Vicinae + Helium + Zen" \
-"sudo dnf install -y ghostty vicinae zen-browser helium"
+# "sudo dnf copr enable -y sneexy/zen-browser"
+#
+# run_step "Enable Ghostty COPR" \
+# "sudo dnf copr enable -y scottames/ghostty"
+#
+# run_step "Enable Vicinae COPR" \
+# "sudo dnf copr enable -y quadratech188/vicinae"
+#
+# run_step "Enable Helium COPR" \
+# "sudo dnf copr enable -y v8v88v8v88/helium"
+#
+# # ---------------------------------------------
+# # Install COPR packages
+# # ---------------------------------------------
+# run_step "Install Ghostty + Vicinae + Helium + Zen" \
+# "sudo dnf install -y ghostty vicinae zen-browser helium"
 
 # ---------------------------------------------
 # Flatpak apps

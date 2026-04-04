@@ -20,8 +20,8 @@
    },
    "theme": {
       "dark": {
-         "name": "zenwritten-dark",
-         "icon_theme": "Tela"
+         "name": "rose-pine",
+         "icon_theme": "Tela dracula"
       }
    },
    "launcher_window": {

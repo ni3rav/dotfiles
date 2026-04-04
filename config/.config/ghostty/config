@@ -28,10 +28,11 @@
 font-family = Cascadia Mono NF
 window-padding-x = 12
 window-padding-y = 8
-theme = Carbonfox
-background-opacity = 0.95
+theme = Catppuccin Mocha
+background-opacity = 0.60
 background-blur = true
-background-blur-radius = 100
+background-blur-radius = 30
+
 #
 # # Spacing around the equals sign does not matter.
 # # All of these are identical:

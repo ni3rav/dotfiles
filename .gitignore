@@ -1,0 +1,16 @@
+# Ignore everything in Code
+config/.config/Code/*
+# But keep User folder
+!config/.config/Code/User/
+# Ignore everything inside User
+config/.config/Code/User/*
+# Allow only specific files
+!config/.config/Code/User/settings.json
+!config/.config/Code/User/keybindings.json
+
+# Ignore everything in Cursor
+config/.config/Cursor/*
+!config/.config/Cursor/User/
+config/.config/Cursor/User/*
+!config/.config/Cursor/User/settings.json
+!config/.config/Cursor/User/keybindings.json

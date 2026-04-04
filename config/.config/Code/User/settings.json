@@ -182,4 +182,6 @@
   "workbench.activityBar.location": "top",
   "workbench.colorTheme": "Andromeda Night Italic",
   "chat.viewSessions.orientation": "stacked",
+  "window.autoDetectColorScheme": true,
+  "workbench.preferredDarkColorTheme": "Andromeda Night Italic",
 }
