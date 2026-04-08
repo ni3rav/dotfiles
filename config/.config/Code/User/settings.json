@@ -181,7 +181,7 @@
   "chat.agentsControl.enabled": false,
   "workbench.activityBar.location": "top",
   "workbench.colorTheme": "Andromeda Night Italic",
-  "chat.viewSessions.orientation": "stacked",
   "window.autoDetectColorScheme": true,
-  "workbench.preferredDarkColorTheme": "Andromeda Night Italic",
+  "workbench.preferredDarkColorTheme": "Bearded Theme Black & Amethyst",
+  "chat.viewSessions.orientation": "stacked",
 }

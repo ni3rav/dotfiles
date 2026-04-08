@@ -7,3 +7,6 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
+[safe]
+	directory = /home/ni3rav/@stuff/collee/sem-6
+	directory = *

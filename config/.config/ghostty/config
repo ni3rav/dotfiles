@@ -29,9 +29,12 @@ font-family = Cascadia Mono NF
 window-padding-x = 12
 window-padding-y = 8
 theme = Catppuccin Mocha
-background-opacity = 0.60
+background-opacity = 0.80
 background-blur = true
-background-blur-radius = 30
+background-blur-radius = 15
+window-theme = ghostty
+gtk-titlebar = true
+
 
 #
 # # Spacing around the equals sign does not matter.

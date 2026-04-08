@@ -181,6 +181,7 @@
   "workbench.colorTheme": "Andromeda Night Italic",
   "chat.viewSessions.orientation": "stacked",
   "window.autoDetectColorScheme": true,
-  "workbench.preferredDarkColorTheme": "Andromeda Night Italic",
+  "workbench.preferredDarkColorTheme": "Bearded Theme Black & Amethyst",
   "cursor.cpp.disabledLanguages": ["plaintext", "markdown", "scminput"],
+  "cursor.composer.usageSummaryDisplay": "always",
 }
