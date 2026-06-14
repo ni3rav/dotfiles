@@ -7,85 +7,104 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "agent": {
+    "default_model": {
+      "provider": "zed.dev",
+      "model": "gpt-5.3-codex",
+      "enable_thinking": true,
+      "effort": "medium",
+    },
+    "favorite_models": [],
+    "model_parameters": [],
+  },
+  "semantic_tokens": "full",
   "ui_font_weight": 500.0,
   "message_editor": {
-    "auto_replace_emoji_shortcode": false
+    "auto_replace_emoji_shortcode": false,
   },
   "edit_predictions": {
-    "provider": "none"
+    "provider": "none",
   },
   "agent_servers": {
+    "cursor": {
+      "type": "registry",
+    },
+    "github-copilot-cli": {
+      "type": "registry",
+    },
     "github-copilot": {
-      "type": "registry"
+      "type": "registry",
     },
     "opencode": {
       "favorite_models": [
         "github-copilot/claude-sonnet-4.5",
         "github-copilot/gemini-3-pro-preview",
-        "opencode/kimi-k2.5-free"
+        "opencode/kimi-k2.5-free",
       ],
-      "type": "registry"
-    }
+      "type": "registry",
+    },
   },
   "ui_font_family": "Cascadia Mono NF",
   "buffer_line_height": "standard",
-  "icon_theme": "Zed (Default)",
+  "icon_theme": "VSCode Icons for Zed (Dark Official Icons)",
   "session": {
-    "trust_all_worktrees": true
+    "trust_all_worktrees": true,
   },
   "vim_mode": true,
   "terminal": {
     "dock": "bottom",
     "font_family": "FiraCode Nerd Font",
     "cursor_shape": "bar",
-    "blinking": "on"
+    "blinking": "on",
   },
   "project_panel": {
-    "auto_fold_dirs": false
+    "auto_fold_dirs": false,
   },
   "base_keymap": "VSCode",
   "preview_tabs": {
-    "enabled": false
+    "enabled": false,
   },
   "tab_bar": {
-    "show_tab_bar_buttons": false
+    "show_tab_bar_buttons": false,
   },
   "relative_line_numbers": "enabled",
   "sticky_scroll": {
-    "enabled": false
+    "enabled": false,
   },
   "gutter": {
-    "line_numbers": true
+    "line_numbers": true,
   },
   "minimap": {
-    "show": "never"
+    "show": "never",
   },
   "cursor_shape": "bar",
   "cursor_blink": true,
   "autosave": {
     "after_delay": {
-      "milliseconds": 1000
-    }
+      "milliseconds": 1000,
+    },
   },
-  "buffer_font_fallbacks": [
-    "Italic"
-  ],
+  "buffer_font_fallbacks": ["Italic"],
   "buffer_font_family": "Cascadia Mono NF",
   "file_types": {
-    "python": [
-      "*.py"
-    ]
+    "python": ["*.py", "*.py"],
   },
   "linked_edits": true,
   "indent_guides": {
-    "enabled": false
+    "enabled": false,
   },
   "soft_wrap": "editor_width",
   "ui_font_size": 20.0,
-  "buffer_font_size": 18.0,
+  "buffer_font_size": 16.0,
   "theme": {
     "mode": "dark",
     "light": "One Light",
-    "dark": "Andromeda Night Italic",
+    "dark": "Tokyo Night",
+  },
+  "formatter": {
+    "external": {
+      "command": "prettier",
+      "arguments": ["--stdin-filepath", "{buffer_path}"],
+    },
   },
 }

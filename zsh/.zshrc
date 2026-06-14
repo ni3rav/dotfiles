@@ -1,5 +1,5 @@
 export PATH="$HOME/.local/bin:$PATH"
-export ZSH="$HOME/dotfiles/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 export UV_LINK_MODE=copy
 
 eval "$(zoxide init zsh)"
@@ -13,7 +13,7 @@ alias zconf="nvim ~/.zshrc"
 alias reload="source ~/.zshrc"
 alias shadcn="pnpm dlx shadcn@latest"
 alias cat="bat"
-
+alias ls="eza --long --icons"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -41,3 +41,11 @@ export PATH="$HOME/go/bin:$PATH"
 
 export PASSWORD_STORE_TYPE=basic
 eval "$(oh-my-posh init zsh --config /home/ni3rav/.oh-my-posh-theme.json)"
+
+# pnpm
+export PNPM_HOME="/home/ni3rav/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end

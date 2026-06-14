@@ -33,7 +33,6 @@ background-opacity = 0.80
 background-blur = true
 background-blur-radius = 15
 window-theme = ghostty
-gtk-titlebar = true
 
 
 #

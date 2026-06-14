@@ -12,7 +12,6 @@
     "editor.tabCompletion": "onlySnippets",
     "editor.wordBasedSuggestions": "off",
   },
-  "python.defaultInterpreterPath": "C:\\Users\\mahet\\AppData\\Local\\Programs\\Python\\Python311\\python.exe",
   "git.openRepositoryInParentFolders": "always",
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
@@ -149,7 +148,7 @@
   "better-comments.highlightPlainText": true,
   "editor.formatOnSave": true,
   "github.copilot.enable": {
-    "*": false,
+    "*": true,
     "plaintext": false,
     "markdown": false,
     "scminput": false,
@@ -181,7 +180,12 @@
   "chat.agentsControl.enabled": false,
   "workbench.activityBar.location": "top",
   "workbench.colorTheme": "Andromeda Night Italic",
-  "window.autoDetectColorScheme": true,
-  "workbench.preferredDarkColorTheme": "Bearded Theme Black & Amethyst",
   "chat.viewSessions.orientation": "stacked",
+  "window.autoDetectColorScheme": true,
+  "workbench.preferredDarkColorTheme": "Andromeda Night Italic",
+  "workbench.iconTheme": "symbols",
+  "azureFunctions.showProjectWarning": false,
+  "[go]": {
+    "editor.defaultFormatter": "golang.go",
+  },
 }
