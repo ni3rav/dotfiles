@@ -25,7 +25,7 @@
 # ==========================
 # # The config file consists of simple key-value pairs,
 # # separated by equals signs.
-font-family = Cascadia Mono NF
+font-family = SauceCodePro Nerd Font
 window-padding-x = 12
 window-padding-y = 8
 theme = Doom One

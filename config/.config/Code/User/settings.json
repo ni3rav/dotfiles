@@ -153,7 +153,6 @@
     "markdown": false,
     "scminput": false,
   },
-  "editor.fontSize": 16,
   "chat.commandCenter.enabled": false,
   "breadcrumbs.enabled": false,
   "files.associations": {
@@ -171,8 +170,7 @@
   "workbench.layoutControl.enabled": false,
   "window.menuBarVisibility": "toggle",
   "editor.lineHeight": 1.25,
-  "terminal.integrated.fontFamily": "FiraCode Nerd Font",
-  "editor.fontFamily": "Cascadia Mono NF, Italic",
+  "editor.fontFamily": "SauceCodePro Nerd Font",
   "editor.fontLigatures": "'calt','ss01'",
   "window.zoomLevel": 1.4,
   "@azure.argTenant": "",
@@ -182,7 +180,7 @@
   "workbench.colorTheme": "Andromeda Night Italic",
   "chat.viewSessions.orientation": "stacked",
   "window.autoDetectColorScheme": true,
-  "workbench.preferredDarkColorTheme": "Andromeda Night Italic",
+  "workbench.preferredDarkColorTheme": "Andromeda Night",
   "workbench.iconTheme": "symbols",
   "azureFunctions.showProjectWarning": false,
   "[go]": {
