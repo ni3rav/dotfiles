@@ -29,10 +29,9 @@ font-family = SauceCodePro Nerd Font
 window-padding-x = 12
 window-padding-y = 8
 theme = Doom One
-background-opacity = 0.80
 background-blur = true
 background-blur-radius = 15
-window-theme = ghostty
+window-theme = system
 
 
 #
