@@ -49,3 +49,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME/bin:$PATH" ;;
 esac
 # pnpm end
+
+# nub
+export PATH="$HOME/.nub/bin:$PATH"
