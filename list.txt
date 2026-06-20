@@ -1,0 +1,7 @@
+zshell
+oh-my-zsh
+oh-my-posh
+zoxide
+eza
+bat
+neovim

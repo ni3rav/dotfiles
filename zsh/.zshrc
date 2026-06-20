@@ -1,6 +1,5 @@
 export PATH="$HOME/.local/bin:$PATH"
 export ZSH="$HOME/.oh-my-zsh"
-export UV_LINK_MODE=copy
 
 eval "$(zoxide init zsh)"
 
