@@ -182,7 +182,7 @@
   "chat.viewSessions.orientation": "stacked",
   "window.autoDetectColorScheme": true,
   "workbench.preferredDarkColorTheme": "One DarkPuccin Night",
-  "workbench.iconTheme": "symbols",
+  "workbench.iconTheme": "bearded-icons",
   "azureFunctions.showProjectWarning": false,
   "[go]": {
     "editor.defaultFormatter": "golang.go",

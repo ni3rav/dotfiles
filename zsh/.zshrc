@@ -6,8 +6,6 @@ export PATH="$HOME/.opencode/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.nub/bin:$PATH"
 
-export PASSWORD_STORE_TYPE=basic
-
 eval "$(zoxide init zsh)"
 
 alias cd="z"
@@ -33,7 +31,7 @@ case ":$PATH:" in
     *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
-eval "$(oh-my-posh init zsh --config ~/.oh-my-posh-theme.json)"
+eval "$(starship init zsh)"
 
 source ~/.zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
