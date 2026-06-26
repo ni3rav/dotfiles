@@ -191,5 +191,10 @@
     "azureFunctions.showProjectWarning": false,
     "[go]": {
         "editor.defaultFormatter": "golang.go"
-    }
+    },
+    "cursor.cpp.disabledLanguages": [
+        "plaintext",
+        "markdown",
+        "scminput"
+    ]
 }

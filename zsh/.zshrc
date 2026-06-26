@@ -5,6 +5,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.opencode/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.nub/bin:$PATH"
+export EDITOR="vi"
 
 eval "$(zoxide init zsh)"
 
@@ -40,3 +41,7 @@ function zvm_after_init() {
 }
 
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^X^E' edit-command-line

@@ -25,7 +25,7 @@
 # ==========================
 # # The config file consists of simple key-value pairs,
 # # separated by equals signs.
-font-family = SauceCodePro Nerd Font
+font-family = SauceCodePro Nerd Font Mono
 font-size = 14
 window-padding-x = 12
 window-padding-y = 8
