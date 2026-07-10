@@ -6,6 +6,16 @@ export PATH="$HOME/.opencode/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.nub/bin:$PATH"
 export EDITOR="vi"
+# History
+export HISTFILE="$HOME/.zsh_history"
+export HISTSIZE=100000
+export SAVEHIST=100000
+
+setopt APPEND_HISTORY
+setopt INC_APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
 
 eval "$(zoxide init zsh)"
 
@@ -45,3 +55,7 @@ source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^X^E' edit-command-line
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/ni3rav/.local/bin:$PATH"
