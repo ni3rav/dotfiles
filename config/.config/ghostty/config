@@ -25,12 +25,12 @@
 # ==========================
 # # The config file consists of simple key-value pairs,
 # # separated by equals signs.
-font-family = SauceCodePro Nerd Font Mono
-font-size = 14
-window-padding-x = 12
-window-padding-y = 8
-theme = Banana Blueberry
+font-size = 12
+window-padding-x = 6
+window-padding-y = 6
 window-decoration = server
+theme = Arthur
+font-family = Maple Mono NF CN
 
 #
 # # Spacing around the equals sign does not matter.

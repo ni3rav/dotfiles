@@ -169,8 +169,8 @@
   "github.copilot.nextEditSuggestions.enabled": true,
   "workbench.layoutControl.enabled": false,
   "window.menuBarVisibility": "toggle",
-  "editor.lineHeight": 1.25,
-  "editor.fontFamily": "SauceCodePro Nerd Font Mono",
+  "editor.lineHeight": 1.5,
+  "editor.fontFamily": "Maple Mono NF CN",
   "editor.fontLigatures": "'calt','ss01'",
   "window.zoomLevel": 1.4,
   "@azure.argTenant": "",
@@ -185,8 +185,7 @@
   "[go]": {
     "editor.defaultFormatter": "golang.go",
   },
-  "window.commandCenter": false,
   "workbench.browser.showInTitleBar": false,
   "chat.titleBar.openInAgentsWindow.enabled": false,
-  "workbench.preferredDarkColorTheme": "Flate Bold",
+  "workbench.preferredDarkColorTheme": "Dark Modern",
 }
