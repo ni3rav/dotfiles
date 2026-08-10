@@ -14,22 +14,31 @@
    "escape_key_behavior": "close_window",
    "favicon_service": "google",
    "font": {
+      "rendering": "native",
       "normal": {
          "family": "Maple Mono NF CN",
-         "size": 13
+         "size": 10
       }
    },
    "theme": {
       "dark": {
-         "name": "zenwritten-dark",
-         "icon_theme": "COSMIC"
+         "name": "vicinae-dark",
+         "icon_theme": "Pop"
       }
    },
+   "telemetry": {
+      "system_info": false
+   },
    "launcher_window": {
-      "opacity": 1,
+      "rounding": 0,
+      "opacity": 0.98,
+      "client_side_decorations": {
+         "border_width": 1
+      },
       "compact_mode": {
-         "enabled": false
-      }
+         "enabled": true
+      },
+      "material": "blur"
    },
    "providers": {
       "applications": {
@@ -45,6 +54,13 @@
       "clipboard": {
          "preferences": {
             "monitoring": true
+         },
+         "entrypoints": {
+            "history": {
+               "preferences": {
+                  "defaultAction": "paste"
+               }
+            }
          }
       },
       "core": {
@@ -85,6 +101,9 @@
             "search-builtin-icons": {
                "enabled": false
             },
+            "search-emojis": {
+               "alias": "em"
+            },
             "settings": {
                "enabled": true
             },
@@ -97,10 +116,17 @@
          "enabled": false
       },
       "font": {
-         "enabled": false
+         "enabled": true
       },
       "raycast-compat": {
          "enabled": false
+      },
+      "system": {
+         "entrypoints": {
+            "browse-apps": {
+               "enabled": true
+            }
+         }
       },
       "theme": {
          "enabled": false

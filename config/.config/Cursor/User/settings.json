@@ -186,6 +186,6 @@
   },
   "workbench.browser.showInTitleBar": false,
   "chat.titleBar.openInAgentsWindow.enabled": false,
-  "workbench.preferredDarkColorTheme": "Dark Modern",
   "cursor.cpp.disabledLanguages": ["plaintext", "markdown", "scminput"],
+  "python.defaultInterpreterPath": "/bin/python",
 }
