@@ -172,7 +172,7 @@
   "editor.lineHeight": 1.5,
   "editor.fontFamily": "Maple Mono NF CN",
   "editor.fontLigatures": "'calt','ss01'",
-  "window.zoomLevel": 1.4,
+  "window.zoomLevel": 1.5,
   "@azure.argTenant": "",
   "workbench.editor.empty.hint": "hidden",
   "chat.agentsControl.enabled": false,
