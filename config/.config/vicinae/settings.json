@@ -17,12 +17,12 @@
       "rendering": "native",
       "normal": {
          "family": "Maple Mono NF CN",
-         "size": 10
+         "size": 12
       }
    },
    "theme": {
       "dark": {
-         "name": "vicinae-dark",
+         "name": "catppuccin-mocha",
          "icon_theme": "Pop"
       }
    },
