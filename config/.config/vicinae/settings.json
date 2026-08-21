@@ -16,14 +16,14 @@
    "font": {
       "rendering": "native",
       "normal": {
-         "family": "Maple Mono NF CN",
-         "size": 12
+         "family": "Plus Jakarta Sans",
+         "size": 11
       }
    },
    "theme": {
       "dark": {
-         "name": "catppuccin-mocha",
-         "icon_theme": "Pop"
+         "name": "zenwritten-dark",
+         "icon_theme": "Vimix-black"
       }
    },
    "telemetry": {
@@ -31,12 +31,12 @@
    },
    "launcher_window": {
       "rounding": 0,
-      "opacity": 0.98,
+      "opacity": 0.8,
       "client_side_decorations": {
          "border_width": 1
       },
       "compact_mode": {
-         "enabled": true
+         "enabled": false
       },
       "material": "blur"
    },

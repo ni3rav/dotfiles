@@ -186,6 +186,10 @@
   },
   "workbench.browser.showInTitleBar": false,
   "chat.titleBar.openInAgentsWindow.enabled": false,
-  "cursor.cpp.disabledLanguages": ["plaintext", "markdown", "scminput"],
+  "cursor.cpp.disabledLanguages": [
+    "plaintext",
+    "markdown",
+    "scminput"
+  ],
   "python.defaultInterpreterPath": "/bin/python",
 }

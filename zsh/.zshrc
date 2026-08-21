@@ -59,3 +59,8 @@ bindkey '^X^E' edit-command-line
 
 # Added by Antigravity CLI installer
 export PATH="/home/ni3rav/.local/bin:$PATH"
+
+# bun completions
+[ -s "/home/ni3rav/.bun/_bun" ] && source "/home/ni3rav/.bun/_bun"
+
+. "$HOME/.cargo/env"
