@@ -1,19 +1,22 @@
 {
-  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
+  "$schema": "https://github.com",
   "display": {
     "key": {
-      "width": 10
+      "width": 6
     },
     "size": {
       "binaryPrefix": "jedec"
     },
-    "separator": ""
+    "separator": " "
   },
   "logo": {
-    "type": "auto"
+    "type": "builtin",
+    "source": "linux",
+    "padding": {
+      "right": 2
+    }
   },
   "modules": [
-    "break",
     {
       "type": "os",
       "key": "os",

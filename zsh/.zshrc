@@ -45,12 +45,14 @@ esac
 eval "$(starship init zsh)"
 
 source ~/.zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-
-function zvm_after_init() {
-    source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-}
-
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# deja autosuggestions
+if [[ -r "$HOME/.local/share/deja/init.zsh" ]]; then
+    source "$HOME/.local/share/deja/init.zsh"
+elif (( $+commands[deja] )); then
+    eval "$(deja init zsh)"
+fi
 
 autoload -Uz edit-command-line
 zle -N edit-command-line

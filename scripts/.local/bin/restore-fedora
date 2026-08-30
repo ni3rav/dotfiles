@@ -121,6 +121,12 @@ run_step "Install uv package manager" \
 "curl -LsSf https://astral.sh/uv/install.sh | sh"
 
 # ---------------------------------------------
+# Deja (autosuggestions)
+# ---------------------------------------------
+run_step "Install Deja" \
+"curl -fsSL https://raw.githubusercontent.com/Giammarco-Ferranti/deja/main/install.sh | sh"
+
+# ---------------------------------------------
 # Brave
 # ---------------------------------------------
 run_step "Install Brave" \

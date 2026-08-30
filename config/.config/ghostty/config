@@ -28,10 +28,10 @@
 font-size = 14
 window-padding-x = 10
 window-padding-y = 6
-window-decoration = server
-theme = Catppuccin Mocha
+window-decoration = none
+theme = Arthur
 font-family = JetBrainsMono Nerd Font
-background-opacity = 0.95
+background-opacity = 0.97
 background-blur = true
 
 #
