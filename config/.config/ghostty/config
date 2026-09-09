@@ -29,9 +29,9 @@ font-size = 14
 window-padding-x = 10
 window-padding-y = 6
 window-decoration = none
-theme = Arthur
+theme = Afterglow
 font-family = JetBrainsMono Nerd Font
-background-opacity = 0.97
+background-opacity = 0.90
 background-blur = true
 
 #

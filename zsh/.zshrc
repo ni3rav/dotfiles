@@ -26,6 +26,7 @@ alias shadcn="pnpm dlx shadcn@latest"
 alias cat="bat"
 alias ls="eza --long --icons --classify=auto"
 alias glo="git log --oneline --graph"
+alias vi="nvim"
 
 export NVM_DIR="$HOME/.nvm"
 [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
@@ -46,13 +47,6 @@ eval "$(starship init zsh)"
 
 source ~/.zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# deja autosuggestions
-if [[ -r "$HOME/.local/share/deja/init.zsh" ]]; then
-    source "$HOME/.local/share/deja/init.zsh"
-elif (( $+commands[deja] )); then
-    eval "$(deja init zsh)"
-fi
 
 autoload -Uz edit-command-line
 zle -N edit-command-line

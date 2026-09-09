@@ -23,7 +23,7 @@
    "theme": {
       "dark": {
          "name": "gruvbox-dark",
-         "icon_theme": "Kaze-dark"
+         "icon_theme": "yet-another-monochrome-icon-set"
       }
    },
    "telemetry": {
