@@ -1,16 +1,13 @@
-# History ghost suggestions for zsh.
+# Ghost suggestions from commands that last succeeded (exit 0).
 #
-# Type a prefix → dim preview of a past command.
-# Up/Down      → cycle matches (prefix first, then fuzzy).
-# Right / End  → accept the preview.
+# Type a prefix → dim suffix of a matching successful command.
+# Up/Down      → cycle other prefix matches.
+# Right / End  → accept the preview (becomes normal buffer text).
 # Tab          → untouched (native completion).
 # Enter        → runs only what you typed; accept first if you want the preview.
-#
-# Fuzzy = case-insensitive substring, then subsequence whose first char
-# matches a word start (so gst → git status, not cargo test).
 
 if (( ${+_HS_LOADED} )); then
-  _hs_bind_keys
+  _hs_setup_zle
   return
 fi
 typeset -g _HS_LOADED=1
@@ -18,10 +15,11 @@ typeset -g _HS_LOADED=1
 : ${ZSH_HISTORY_SUGGEST_HIGHLIGHT:=fg=8}
 : ${ZSH_HISTORY_SUGGEST_MAX:=40}
 : ${ZSH_HISTORY_SUGGEST_SCAN:=4000}
-: ${ZSH_HISTORY_SUGGEST_FUZZY_MIN:=2}
+: ${ZSH_HISTORY_SUGGEST_FILE:=${XDG_DATA_HOME:-$HOME/.local/share}/zsh-history-suggest/commands}
 
-typeset -g _hs_suggestion _hs_query _hs_found
-typeset -ga _hs_matches
+typeset -g _hs_suggestion _hs_query _hs_found _hs_pending
+typeset -ga _hs_matches _hs_cmds
+typeset -gA _hs_seen
 typeset -gi _hs_index=1 _hs_locked=0
 
 _hs_clear() {
@@ -35,75 +33,105 @@ _hs_reset() {
   _hs_index=1
 }
 
-# First char of query must start the line or a word.
-_hs_fuzzy_eligible() {
-  local q=$1 cmd=${(L)2}
-  local ch=${(L)q[1]}
-  [[ $cmd == "$ch"* || $cmd == *" $ch"* ]]
+_hs_unhighlight() {
+  (( ${+region_highlight} )) || return
+  region_highlight=( "${(@)region_highlight:#*memo=zsh-history-suggest*}" )
 }
 
 _hs_apply() {
   typeset -g _hs_suggestion=$1
-  if [[ -z $BUFFER || -z $_hs_suggestion ]]; then
-    unset POSTDISPLAY
-    return
-  fi
-  if [[ ${_hs_suggestion:l} == "${BUFFER:l}"* ]]; then
+  if [[ -n $BUFFER && -n $_hs_suggestion && ${_hs_suggestion:l} == "${BUFFER:l}"* ]]; then
     POSTDISPLAY=${_hs_suggestion:${#BUFFER}}
   else
-    POSTDISPLAY="  → ${_hs_suggestion}"
+    unset POSTDISPLAY _hs_suggestion
   fi
+}
+
+_hs_load() {
+  emulate -L zsh
+  _hs_cmds=()
+  _hs_seen=()
+  [[ -r $ZSH_HISTORY_SUGGEST_FILE ]] || return
+
+  local -a raw
+  raw=("${(@f)$(<$ZSH_HISTORY_SUGGEST_FILE)}")
+  local line
+  integer i
+  for (( i = $#raw; i >= 1; i-- )); do
+    line=$raw[i]
+    [[ -n $line ]] || continue
+    (( ${+_hs_seen[$line]} )) && continue
+    _hs_seen[$line]=1
+    _hs_cmds+=("$line")
+    (( $#_hs_cmds >= ZSH_HISTORY_SUGGEST_SCAN )) && break
+  done
+
+  (( $#raw > ZSH_HISTORY_SUGGEST_SCAN * 2 )) && _hs_compact
+}
+
+_hs_compact() {
+  emulate -L zsh
+  local dir=${ZSH_HISTORY_SUGGEST_FILE:h}
+  local tmp=$ZSH_HISTORY_SUGGEST_FILE.tmp.$$
+  [[ -d $dir ]] || mkdir -p -- "$dir" || return
+  local -a oldest
+  oldest=("${(@Oa)_hs_cmds}")
+  print -r -- "${(F)oldest}" >| "$tmp" && mv -f -- "$tmp" "$ZSH_HISTORY_SUGGEST_FILE"
+}
+
+_hs_record() {
+  emulate -L zsh
+  local cmd=$1
+  [[ -n $cmd ]] || return
+  [[ $cmd == [[:space:]]* || $cmd == *$'\n'* ]] && return
+
+  if [[ ${_hs_cmds[1]-} == $cmd ]]; then
+    return
+  fi
+
+  if (( ${+_hs_seen[$cmd]} )); then
+    _hs_cmds=("$cmd" "${(@)_hs_cmds:#${(b)cmd}}")
+  else
+    _hs_cmds=("$cmd" "${_hs_cmds[@]}")
+    _hs_seen[$cmd]=1
+    if (( $#_hs_cmds > ZSH_HISTORY_SUGGEST_SCAN )); then
+      local drop=${_hs_cmds[-1]}
+      unset "_hs_seen[$drop]"
+      _hs_cmds[-1]=()
+    fi
+  fi
+
+  local dir=${ZSH_HISTORY_SUGGEST_FILE:h}
+  [[ -d $dir ]] || mkdir -p -- "$dir" || return
+  print -r -- "$cmd" >>| "$ZSH_HISTORY_SUGGEST_FILE"
+}
+
+_hs_preexec() {
+  [[ -n ${1:-} ]] || return
+  typeset -g _hs_pending="$1"
+}
+
+# Must run first in precmd so $? is still the previous command.
+_hs_precmd() {
+  local -i st=$?
+  local cmd=${_hs_pending-}
+  unset _hs_pending
+  (( st == 0 )) || return
+  [[ -n $cmd ]] || return
+  _hs_record "$cmd"
 }
 
 _hs_best() {
   emulate -L zsh
   setopt EXTENDED_GLOB
-  local prefix=$1
+  local prefix=$1 cmd
   unset _hs_found
   [[ -n $prefix ]] || return 1
 
   local ppat="(#i)${(b)prefix}*"
-  local cmd="${history[(r)$ppat]}"
-  if (( $#cmd > $#prefix )) && [[ $cmd != *$'\n'* ]]; then
-    typeset -g _hs_found=$cmd
-    return 0
-  fi
-
-  local cmd_i
-  for cmd_i in "${(@)history[(R)$ppat]}"; do
-    if (( $#cmd_i > $#prefix )) && [[ $cmd_i != *$'\n'* ]]; then
-      typeset -g _hs_found=$cmd_i
-      return 0
-    fi
-  done
-
-  (( $#prefix >= ZSH_HISTORY_SUGGEST_FUZZY_MIN )) || return 1
-
-  local spat="(#i)*${(b)prefix}*"
-  for cmd_i in "${(@)history[(R)$spat]}"; do
-    if (( $#cmd_i > $#prefix )) && [[ $cmd_i != *$'\n'* ]]; then
-      typeset -g _hs_found=$cmd_i
-      return 0
-    fi
-  done
-
-  local fpat="(#i)"
-  integer i
-  for (( i = 1; i <= $#prefix; i++ )); do
-    fpat+="*${(b)prefix[i]}"
-  done
-  fpat+="*"
-
-  local -a keys
-  keys=(${(Onk)history})
-  integer max=$ZSH_HISTORY_SUGGEST_SCAN
-  (( $#keys < max )) && max=$#keys
-  for (( i = 1; i <= max; i++ )); do
-    cmd_i=$history[$keys[i]]
-    if (( $#cmd_i > $#prefix )) && [[ $cmd_i != *$'\n'* ]] \
-      && [[ $cmd_i == ${~fpat} ]] && _hs_fuzzy_eligible "$prefix" "$cmd_i" \
-      && [[ $cmd_i != ${~spat} ]]; then
-      typeset -g _hs_found=$cmd_i
+  for cmd in "${_hs_cmds[@]}"; do
+    if (( $#cmd > $#prefix )) && [[ $cmd != *$'\n'* && $cmd == ${~ppat} ]]; then
+      typeset -g _hs_found=$cmd
       return 0
     fi
   done
@@ -113,47 +141,18 @@ _hs_best() {
 _hs_collect() {
   emulate -L zsh
   setopt EXTENDED_GLOB
-  local prefix=$1
-  local -aU prefix_m substr_m fuzzy_m
+  local prefix=$1 cmd
+  local -aU prefix_m
   local ppat="(#i)${(b)prefix}*"
-  local spat="(#i)*${(b)prefix}*"
-  local fpat="(#i)"
-  integer i
-  for (( i = 1; i <= $#prefix; i++ )); do
-    fpat+="*${(b)prefix[i]}"
-  done
-  fpat+="*"
 
-  local -a keys
-  keys=(${(Onk)history})
-  integer max=$ZSH_HISTORY_SUGGEST_SCAN
-  (( $#keys < max )) && max=$#keys
-  local cmd
-
-  for (( i = 1; i <= max; i++ )); do
-    cmd=$history[$keys[i]]
-    (( $#cmd > $#prefix )) || continue
-    [[ $cmd == *$'\n'* ]] && continue
-
-    if [[ $cmd == ${~ppat} ]]; then
+  for cmd in "${_hs_cmds[@]}"; do
+    if (( $#cmd > $#prefix )) && [[ $cmd != *$'\n'* && $cmd == ${~ppat} ]]; then
       prefix_m+=("$cmd")
-    elif (( $#prefix >= ZSH_HISTORY_SUGGEST_FUZZY_MIN )) && [[ $cmd == ${~spat} ]]; then
-      substr_m+=("$cmd")
-    elif (( $#prefix >= ZSH_HISTORY_SUGGEST_FUZZY_MIN )) \
-      && [[ $cmd == ${~fpat} ]] && _hs_fuzzy_eligible "$prefix" "$cmd"; then
-      fuzzy_m+=("$cmd")
+      (( $#prefix_m >= ZSH_HISTORY_SUGGEST_MAX )) && break
     fi
-
-    (( $#prefix_m >= ZSH_HISTORY_SUGGEST_MAX \
-      && $#substr_m >= ZSH_HISTORY_SUGGEST_MAX \
-      && $#fuzzy_m >= ZSH_HISTORY_SUGGEST_MAX )) && break
   done
 
-  _hs_matches=(
-    ${prefix_m[1,$ZSH_HISTORY_SUGGEST_MAX]}
-    ${substr_m[1,$ZSH_HISTORY_SUGGEST_MAX]}
-    ${fuzzy_m[1,$ZSH_HISTORY_SUGGEST_MAX]}
-  )
+  _hs_matches=(${prefix_m[1,$ZSH_HISTORY_SUGGEST_MAX]})
 }
 
 _hs_ensure_matches() {
@@ -172,11 +171,14 @@ _hs_accept() {
   BUFFER=$_hs_suggestion
   CURSOR=$#BUFFER
   _hs_reset
+  _hs_unhighlight
 }
 
 _hs_on_redraw() {
+  [[ -n ${WIDGET-} ]] || return
   (( _hs_locked )) && return
   _hs_locked=1
+  _hs_unhighlight
 
   if [[ -z $BUFFER ]]; then
     _hs_reset
@@ -194,7 +196,7 @@ _hs_on_redraw() {
   fi
 
   if [[ -n ${POSTDISPLAY:-} ]]; then
-    region_highlight+=("${#BUFFER} $(( $#BUFFER + $#POSTDISPLAY )) ${ZSH_HISTORY_SUGGEST_HIGHLIGHT}")
+    region_highlight+=("${#BUFFER} $(( $#BUFFER + $#POSTDISPLAY )) ${ZSH_HISTORY_SUGGEST_HIGHLIGHT} memo=zsh-history-suggest")
   fi
 
   _hs_locked=0
@@ -248,11 +250,6 @@ _hs_end() {
   fi
 }
 
-zle -N _hs_up
-zle -N _hs_down
-zle -N _hs_forward
-zle -N _hs_end
-
 _hs_bind_keys() {
   local k
   for k in '^[[A' '^[OA'; do
@@ -277,9 +274,31 @@ _hs_bind_keys() {
   done
 }
 
-_hs_bind_keys
-(( $+zvm_after_init_commands )) || typeset -ga zvm_after_init_commands
-zvm_after_init_commands+=(_hs_bind_keys)
+# zsh-vi-mode runs `$(zle -l)` during precmd init. Creating
+# zle-line-pre-redraw before that makes zsh 5.9 SIGSEGV in bin_zle_list.
+_hs_setup_zle() {
+  (( ${+_hs_zle_ready} )) && { _hs_bind_keys; return }
+  typeset -gi _hs_zle_ready=1
+  zle -N _hs_up
+  zle -N _hs_down
+  zle -N _hs_forward
+  zle -N _hs_end
+  zle -N _hs_on_redraw
+  _hs_bind_keys
+  autoload -Uz add-zle-hook-widget
+  add-zle-hook-widget zle-line-pre-redraw _hs_on_redraw
+}
 
-autoload -Uz add-zle-hook-widget
-add-zle-hook-widget zle-line-pre-redraw _hs_on_redraw
+_hs_load
+
+# Capture $? before starship / vi-mode precmds rewrite it.
+typeset -ga precmd_functions preexec_functions
+precmd_functions=(_hs_precmd ${precmd_functions:#_hs_precmd})
+preexec_functions=(_hs_preexec ${preexec_functions:#_hs_preexec})
+
+if (( $+functions[zvm_init] )); then
+  (( $+zvm_after_init_commands )) || typeset -ga zvm_after_init_commands
+  zvm_after_init_commands+=(_hs_setup_zle)
+else
+  _hs_setup_zle
+fi
