@@ -2,7 +2,7 @@
 #
 # Type a prefix → dim suffix of a matching successful command.
 # Up/Down      → cycle other prefix matches.
-# Right / End  → accept the preview (becomes normal buffer text).
+# Right / End  → accept the preview (insert and normal).
 # Tab          → untouched (native completion).
 # Enter        → runs only what you typed; accept first if you want the preview.
 
@@ -166,16 +166,36 @@ _hs_ensure_matches() {
   (( ${#_hs_matches} > 0 ))
 }
 
+_hs_in_normal() {
+  [[ ${KEYMAP-} == vicmd || ${ZVM_MODE-} == n ]]
+}
+
+# Insert: cursor can sit past the last char. Normal: it sits on it.
+_hs_at_eol() {
+  (( CURSOR == $#BUFFER )) && return 0
+  _hs_in_normal && (( $#BUFFER > 0 && CURSOR == $#BUFFER - 1 ))
+}
+
 _hs_accept() {
   [[ -n ${_hs_suggestion:-} ]] || return
   BUFFER=$_hs_suggestion
-  CURSOR=$#BUFFER
+  if _hs_in_normal && (( $#BUFFER > 0 )); then
+    CURSOR=$(( $#BUFFER - 1 ))
+  else
+    CURSOR=$#BUFFER
+  fi
   _hs_reset
   _hs_unhighlight
 }
 
 _hs_on_redraw() {
   [[ -n ${WIDGET-} ]] || return
+  # Mode switches already redraw; touching POSTDISPLAY here wraps the line.
+  case $WIDGET in
+    zvm_enter_*|zvm_exit_*|zvm_select_vi_mode|zvm_reset_prompt|vi-cmd-mode|vi-insert|vi-replace|reset-prompt|zle-keymap-select|zle-line-init)
+      return
+      ;;
+  esac
   (( _hs_locked )) && return
   _hs_locked=1
   _hs_unhighlight
@@ -233,9 +253,11 @@ _hs_down() {
 }
 
 _hs_forward() {
-  if [[ -n ${_hs_suggestion:-} && $CURSOR -eq $#BUFFER ]]; then
+  if [[ -n ${_hs_suggestion:-} ]] && _hs_at_eol; then
     _hs_accept
     zle -R
+  elif _hs_in_normal; then
+    zle .vi-forward-char
   else
     zle .forward-char
   fi
@@ -245,6 +267,8 @@ _hs_end() {
   if [[ -n ${_hs_suggestion:-} ]]; then
     _hs_accept
     zle -R
+  elif _hs_in_normal; then
+    zle .vi-end-of-line
   else
     zle .end-of-line
   fi
@@ -265,11 +289,13 @@ _hs_bind_keys() {
   for k in '^[[C' '^[OC'; do
     bindkey -M emacs $k _hs_forward
     bindkey -M viins $k _hs_forward
+    bindkey -M vicmd $k _hs_forward
     (( $+functions[zvm_bindkey] )) && zvm_bindkey viins $k _hs_forward
   done
   for k in '^[[F' '^[OF' '^[[4~'; do
     bindkey -M emacs $k _hs_end
     bindkey -M viins $k _hs_end
+    bindkey -M vicmd $k _hs_end
     (( $+functions[zvm_bindkey] )) && zvm_bindkey viins $k _hs_end
   done
 }
@@ -299,6 +325,9 @@ preexec_functions=(_hs_preexec ${preexec_functions:#_hs_preexec})
 if (( $+functions[zvm_init] )); then
   (( $+zvm_after_init_commands )) || typeset -ga zvm_after_init_commands
   zvm_after_init_commands+=(_hs_setup_zle)
+  # Re-apply vicmd arrows after zvm's first normal-mode lazy binds.
+  (( $+zvm_after_lazy_keybindings_commands )) || typeset -ga zvm_after_lazy_keybindings_commands
+  zvm_after_lazy_keybindings_commands+=(_hs_bind_keys)
 else
   _hs_setup_zle
 fi
