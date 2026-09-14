@@ -148,7 +148,7 @@ run_step "Install Cursor" \
 # Apply dotfiles
 # ---------------------------------------------
 run_step "Applying dotfiles via stow" \
-"cd \"$DOTFILES_DIR\" && stow zsh tmux git posh config fonts scripts"
+"cd \"$DOTFILES_DIR\" && stow zsh git config local"
 
 echo
 echo "→ dconf handled separately"

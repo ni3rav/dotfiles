@@ -1,0 +1,7 @@
+zsh
+starship
+zoxide
+eza
+bat
+neovim
+ghostty

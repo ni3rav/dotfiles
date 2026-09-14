@@ -47,16 +47,10 @@ eval "$(starship init zsh)"
 
 source ~/.zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh/plugins/zsh-history-suggest/zsh-history-suggest.plugin.zsh
 
 autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^X^E' edit-command-line
-
-
-# Added by Antigravity CLI installer
-export PATH="/home/ni3rav/.local/bin:$PATH"
-
-# bun completions
-[ -s "/home/ni3rav/.bun/_bun" ] && source "/home/ni3rav/.bun/_bun"
 
 . "$HOME/.cargo/env"
