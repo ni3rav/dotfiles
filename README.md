@@ -13,6 +13,8 @@ local   → ~/.local/bin ~/.local/share/fonts
 
 `extra/` is not stowed.
 
+zsh plugins are git submodules (vi-mode, syntax-highlighting, autosuggestions). Clone with `--recurse-submodules`.
+
 # clone
 git clone --recurse-submodules git@github.com:ni3rav/dotfiles.git ~/dotfiles
 cd ~/dotfiles

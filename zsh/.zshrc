@@ -49,8 +49,8 @@ source ~/.zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 # add-zle-hook-widget before zvm_init makes zsh 5.9 SIGSEGV in `$(zle -l)`.
 zvm_after_init_commands+=(
   'source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh'
+  'source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh'
 )
-source ~/.zsh/plugins/zsh-history-suggest/zsh-history-suggest.plugin.zsh
 
 autoload -Uz edit-command-line
 zle -N edit-command-line
