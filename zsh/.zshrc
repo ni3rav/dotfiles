@@ -27,6 +27,8 @@ alias cat="bat"
 alias ls="eza --long --icons --classify=auto"
 alias glo="git log --oneline --graph"
 alias vi="nvim"
+alias vpnc="protonvpn connect"
+alias vpnd="protonvpn disconnect"
 
 export NVM_DIR="$HOME/.nvm"
 [[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
@@ -57,3 +59,7 @@ zle -N edit-command-line
 bindkey '^X^E' edit-command-line
 
 . "$HOME/.cargo/env"
+
+# >>> railway initialize >>>
+source "$HOME/.railway/env"
+# <<< railway initialize <<<

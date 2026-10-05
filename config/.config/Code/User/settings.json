@@ -186,8 +186,8 @@
   },
   "workbench.browser.showInTitleBar": false,
   "chat.titleBar.openInAgentsWindow.enabled": false,
-  "workbench.preferredDarkColorTheme": "Vesper",
   "workbench.activityBar.location": "top",
   "go.toolsManagement.autoUpdate": true,
   "python.analysis.typeCheckingMode": "standard",
+  "network.meteredConnection": "off",
 }
