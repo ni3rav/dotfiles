@@ -31,7 +31,8 @@ window-padding-y = 6
 window-decoration = none
 theme = Ayu Mirage
 font-family = JetBrainsMono Nerd Font
-background-opacity = 0.90
+background-opacity = 0.85
+background-opacity-cells = true
 background-blur = true
 
 #
