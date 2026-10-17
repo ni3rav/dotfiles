@@ -190,4 +190,5 @@
   "go.toolsManagement.autoUpdate": true,
   "python.analysis.typeCheckingMode": "standard",
   "network.meteredConnection": "off",
+  "workbench.preferredDarkColorTheme": "Min Darkest",
 }

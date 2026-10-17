@@ -58,8 +58,10 @@ autoload -Uz edit-command-line
 zle -N edit-command-line
 bindkey '^X^E' edit-command-line
 
-. "$HOME/.cargo/env"
 
-# >>> railway initialize >>>
-source "$HOME/.railway/env"
-# <<< railway initialize <<<
+# bun completions
+[ -s "/home/nirav/.bun/_bun" ] && source "/home/nirav/.bun/_bun"
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/nirav/.local/bin:$PATH"
