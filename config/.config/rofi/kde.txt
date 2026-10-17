@@ -1,0 +1,48 @@
+Rofi on KDE
+============
+
+Bind each command in System Settings → Keyboard → Shortcuts → Add New → Command or Script.
+Click the shortcut box and press the keys you want.
+
+Launcher
+  ~/.config/rofi/launchers/type-1/launcher.sh
+  App menu. Type 1, style 7.
+
+Volume
+  ~/.config/rofi/applets/bin/volume.sh
+  Raise, lower, and mute the speaker and microphone.
+  Settings opens Plasma audio settings.
+
+MPD
+  ~/.config/rofi/applets/bin/mpd.sh
+  Play, pause, stop, previous, next, repeat, and shuffle.
+  Needs the mpd and mpc packages. Until those are installed it reports that MPD is offline.
+
+Power menu
+  ~/.config/rofi/powermenu/type-2/powermenu.sh
+  Type 2, style 2. Each action asks for confirmation.
+  Shutdown   shutdown -h now
+  Reboot     systemctl reboot
+  Suspend    systemctl suspend
+  Lock       KDE screen lock
+  Logout     KDE session logout
+
+Colors
+  The active scheme is adapta.
+  Switch among these, kept in ~/.config/rofi/colors/:
+    adapta.rasi
+    arc.rasi
+    lovelace.rasi
+    tokyonight.rasi
+
+  To switch, set the same import in all three files:
+    ~/.config/rofi/launchers/type-1/shared/colors.rasi
+    ~/.config/rofi/applets/shared/colors.rasi
+    ~/.config/rofi/powermenu/type-2/shared/colors.rasi
+
+  Example:
+    @import "~/.config/rofi/colors/tokyonight.rasi"
+
+Font
+  Text is JetBrainsMono Nerd Font, already installed.
+  Power-menu icons use the feather font in ~/.local/share/fonts/f/.
