@@ -14,3 +14,7 @@ config/.config/Cursor/*
 config/.config/Cursor/User/*
 !config/.config/Cursor/User/settings.json
 !config/.config/Cursor/User/keybindings.json
+
+# ~/.local/bin is this directory. Ignore tools installed into it.
+local/.local/bin/*
+!local/.local/bin/restore-fedora
