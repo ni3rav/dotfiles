@@ -13,6 +13,11 @@ Volume
   Raise, lower, and mute the speaker and microphone.
   Settings opens Plasma audio settings.
 
+Emoji
+  ~/.config/rofi/applets/bin/emoji.sh
+  Search emojis and copy the one you pick. Paste it with Ctrl+V.
+  Skin tone is asked when the emoji has one.
+
 MPD
   ~/.config/rofi/applets/bin/mpd.sh
   Play, pause, stop, previous, next, repeat, and shuffle.
@@ -28,7 +33,7 @@ Power menu
   Logout     KDE session logout
 
 Colors
-  The active scheme is adapta.
+  The active scheme is tokyonight.
   Switch among these, kept in ~/.config/rofi/colors/:
     adapta.rasi
     arc.rasi
