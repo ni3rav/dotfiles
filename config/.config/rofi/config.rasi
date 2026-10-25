@@ -3,7 +3,7 @@ configuration {
     font: "JetBrainsMono Nerd Font 13";
     show-icons: true;
     icon-theme: "Kaze-dark";
-    terminal: "ghostty";
+    terminal: "foot";
     drun-display-format: "{name}";
     display-drun: "Apps";
     display-filebrowser: "Files";

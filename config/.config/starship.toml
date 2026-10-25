@@ -4,143 +4,16 @@
 
 add_newline = true
 
-format = """
-$os$username$hostname$directory$git_branch$git_status
-$character"""
-
-right_format = """
-$cmd_duration$python$nodejs$rust$golang$docker
-"""
-
-# ─────────────────────────────────────────────
-# Prompt character
-# ─────────────────────────────────────────────
+format = "$directory$character"
 
 [character]
-success_symbol = "[❯](bold green)"
+success_symbol = "[❯](bold blue)"
 error_symbol = "[❯](bold red)"
 vimcmd_symbol = "[❮](bold blue)"
 
-# ─────────────────────────────────────────────
-# OS
-# ─────────────────────────────────────────────
-
-[os]
-disabled = false
-style = "bold blue"
-
-[os.symbols]
-Linux = "󰣇 "
-Ubuntu = "󰕈 "
-Arch = "󰣇 "
-Fedora = "󰣛 "
-Debian = "󰣚 "
-Macos = "󰀵 "
-Windows = "󰍲 "
-
-# ─────────────────────────────────────────────
-# User / Host
-# ─────────────────────────────────────────────
-
-[username]
-show_always = false
-style_user = "bold cyan"
-style_root = "bold red"
-format = "[$user]($style) "
-
-[hostname]
-ssh_only = true
-format = "[@$hostname](bold cyan) "
-
-# ─────────────────────────────────────────────
-# Directory
-# ─────────────────────────────────────────────
-
 [directory]
 style = "bold blue"
-format = "[󰉋 $path]($style) "
+format = "[$path]($style) "
 truncation_length = 3
 truncate_to_repo = false
 home_symbol = "~"
-
-[cmd_duration]
-min_time = 500
-format = "[󱎫 $duration]($style) "
-style = "yellow"
-
-# ─────────────────────────────────────────────
-# Git
-# ─────────────────────────────────────────────
-
-[git_branch]
-symbol = " "
-style = "bold purple"
-format = "[$symbol$branch]($style) "
-
-[git_status]
-style = "bold red"
-format = "([$all_status$ahead_behind]($style)) "
-
-conflicted = "󰞇 "
-ahead = "󰁝 "
-behind = "󰁔 "
-diverged = "󰹹 "
-up_to_date = "󰄬 "
-
-untracked = "󰋗 "
-stashed = "󰏗 "
-modified = "󰏫 "
-staged = "󰐕 "
-renamed = "󰑕 "
-deleted = "󰆴 "
-
-# ─────────────────────────────────────────────
-# Languages / Tools
-# ─────────────────────────────────────────────
-
-[python]
-symbol = "󰌠 "
-style = "yellow"
-format = "[$symbol$version]($style) "
-
-[nodejs]
-symbol = "󰎙 "
-style = "green"
-format = "[$symbol$version]($style) "
-
-[rust]
-symbol = "󱘗 "
-style = "red"
-format = "[$symbol$version]($style) "
-
-[golang]
-symbol = "󰟓 "
-style = "cyan"
-format = "[$symbol$version]($style) "
-
-[docker_context]
-symbol = "󰡨 "
-style = "blue"
-format = "[$symbol$context]($style) "
-
-# ─────────────────────────────────────────────
-# Other useful modules
-# ─────────────────────────────────────────────
-
-[package]
-symbol = "󰏗 "
-style = "bold yellow"
-format = "[$symbol$version]($style) "
-
-[terraform]
-symbol = "󱁢 "
-format = "[$symbol$workspace]($style) "
-
-[kubernetes]
-disabled = true
-symbol = "󱃾 "
-format = "[$symbol$context]($style) "
-
-[aws]
-symbol = "󰸏 "
-format = "[$symbol$profile]($style) "

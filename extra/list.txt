@@ -4,4 +4,4 @@ zoxide
 eza
 bat
 neovim
-ghostty
+foot
