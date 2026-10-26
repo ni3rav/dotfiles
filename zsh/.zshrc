@@ -6,6 +6,15 @@ export PATH="$HOME/.opencode/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export PATH="$HOME/.nub/bin:$PATH"
 export EDITOR="vi"
+
+# Panes inside Herdr set HERDR_ENV, so this does not relaunch from a pane.
+if [[ -o interactive && -t 1 && -z "$HERDR_ENV" ]]; then
+  if command -v herdr >/dev/null 2>&1; then
+    exec herdr
+  else
+    print -u2 "herdr is either not installed or not added to PATH"
+  fi
+fi
 # History
 export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=100000
