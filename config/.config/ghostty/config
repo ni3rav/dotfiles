@@ -29,12 +29,12 @@ font-size = 14
 window-padding-x = 10
 window-padding-y = 6
 window-decoration = none
-theme = Framer
+theme = Vercel
 font-family = JetBrainsMono Nerd Font
 background-opacity = 0.65
 background-opacity-cells = true
 background-blur = true
-
+confirm-close-surface=false
 #
 # # Spacing around the equals sign does not matter.
 # # All of these are identical:

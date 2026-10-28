@@ -1,6 +1,22 @@
 [ActivityManager][Global Shortcuts]
 switch-to-activity-e64a0ad0-557c-4a55-9c97-96f7144d9b67=
 
+[Custom Commands][net.local.vicinae-2.desktop]
+Exec=vicinae vicinae://launch/clipboard/history
+Name=vicinae clipboard
+
+[Custom Commands][net.local.vicinae-3.desktop]
+Exec=vicinae vicinae://launch/core/search-emojis
+Name=emoji
+
+[Custom Commands][net.local.vicinae-4.desktop]
+Exec=\svicinae vicinae://launch/files/search
+Name=vicinae file
+
+[Custom Commands][net.local.vicinae.desktop]
+Exec=vicinae toggle
+Name=vicinae
+
 [KDE Keyboard Layout Switcher][Global Shortcuts]
 Switch to Last-Used Keyboard Layout=Meta+Alt+L
 Switch to Next Keyboard Layout=Meta+Alt+K
@@ -9,7 +25,7 @@ Switch to Next Keyboard Layout=Meta+Alt+K
 AboutApp=
 AboutKDE=
 Activate Next Tab=Ctrl+]; Ctrl+PgDown
-Activate Previous Tab=Ctrl+PgUp; Ctrl+[
+Activate Previous Tab=Ctrl+[; Ctrl+PgUp
 ActualSize=Ctrl+0
 AddBookmark=Ctrl+B
 Back=Back; Alt+Left
@@ -20,7 +36,7 @@ Clear=
 Close=Ctrl+Esc; Ctrl+W
 ConfigureNotifications=
 ConfigureToolbars=
-Copy=Ctrl+C; Ctrl+Ins
+Copy=Ctrl+Ins; Ctrl+C
 CreateFolder=Ctrl+Shift+N
 Cut=Shift+Del; Ctrl+X
 DeleteFile=Shift+Del
@@ -39,14 +55,14 @@ FindPrev=Shift+F3
 FitToHeight=
 FitToPage=
 FitToWidth=
-Forward=Alt+Right; Forward
+Forward=Forward; Alt+Right
 ForwardWord=Ctrl+Right
 FullScreen=Ctrl+Shift+F
 Goto=
 GotoLine=Ctrl+G
 GotoPage=
 Help=F1
-Home=Alt+Home; Home Page
+Home=Home Page; Alt+Home
 KeyBindings=Ctrl+Alt+,
 Mail=
 MoveToTrash=Del
@@ -54,10 +70,10 @@ New=Ctrl+N
 Next=PgDown
 NextCompletion=Ctrl+Down
 Open=Ctrl+O
-OpenContextMenu=Shift+F10; Menu
+OpenContextMenu=Menu; Shift+F10
 OpenMainMenu=F10
 OpenRecent=
-Paste=Ctrl+V; Shift+Ins
+Paste=Shift+Ins; Ctrl+V
 Paste Selection=Ctrl+Shift+Ins
 Preferences=Ctrl+Shift+,
 PrevCompletion=Ctrl+Up
@@ -66,7 +82,7 @@ PrintPreview=
 Prior=PgUp
 Quit=Ctrl+Q
 Redo=Ctrl+Shift+Z
-Reload=Refresh; F5
+Reload=F5; Refresh
 RenameFile=F2
 Replace=Ctrl+R
 ReportBug=
@@ -76,7 +92,7 @@ RotateUp=Up
 Save=Ctrl+S
 SaveAs=Ctrl+Shift+S
 SelectAll=Ctrl+A
-ShowHideHiddenFiles=Ctrl+H; Alt+.
+ShowHideHiddenFiles=Alt+.; Ctrl+H
 ShowMenubar=Ctrl+M
 ShowStatusbar=
 ShowToolbar=
@@ -92,7 +108,8 @@ ZoomIn=Ctrl+=; Ctrl++
 ZoomOut=Ctrl+-
 
 [com.mitchellh.ghostty.desktop][Global Shortcuts]
-_launch=Ctrl+Alt+T; Meta+Return
+_launch=
+new-window=Meta+Return
 
 [kaccess][Global Shortcuts]
 Toggle Screen Reader On and Off=Meta+Alt+S
@@ -124,13 +141,52 @@ Cycle Overview=
 Cycle Overview Opposite=
 Decrease Opacity=
 Edit Tiles=Meta+T
-Expose=Ctrl+F9; Meta+F9
-ExposeAll=Ctrl+F10; Meta+F10; Launch (C)
-ExposeClass=Meta+F7; Ctrl+F7
+Expose=Meta+F9; Ctrl+F9
+ExposeAll=Meta+F10; Launch (C); Ctrl+F10
+ExposeClass=Ctrl+F7; Meta+F7
 ExposeClassCurrentDesktop=
 Grid View=Meta+G
 Increase Opacity=
 Kill Window=Meta+Ctrl+Esc
+KrohnkiteBTreeLayout=
+KrohnkiteCascadeLayout=
+KrohnkiteColumnsLayout=
+KrohnkiteDecrease=Meta+D
+KrohnkiteFloatAll=Meta+Shift+F
+KrohnkiteFloatingLayout=
+KrohnkiteFocusDown=Meta+J
+KrohnkiteFocusLeft=Meta+H
+KrohnkiteFocusNext=Meta+.
+KrohnkiteFocusPrev=Meta+,
+KrohnkiteFocusRight=Meta+L
+KrohnkiteFocusUp=Meta+K
+KrohnkiteGrowHeight=Meta+Ctrl+J
+KrohnkiteIncrease=Meta+I
+KrohnkiteLowerSurfaceCapacity=
+KrohnkiteMeta=
+KrohnkiteMonocleLayout=Meta+M
+KrohnkiteNextLayout=Meta+\\
+KrohnkitePreviousLayout=Meta+|
+KrohnkiteQuarterLayout=
+KrohnkiteRaiseSurfaceCapacity=
+KrohnkiteRotate=Meta+R
+KrohnkiteRotatePart=Meta+Shift+R
+KrohnkiteSetMaster=
+KrohnkiteShiftDown=Meta+Shift+J
+KrohnkiteShiftLeft=Meta+Shift+H
+KrohnkiteShiftRight=Meta+Shift+L
+KrohnkiteShiftUp=Meta+Shift+K
+KrohnkiteShrinkHeight=Meta+Ctrl+K
+KrohnkiteShrinkWidth=Meta+Ctrl+H
+KrohnkiteSpiralLayout=
+KrohnkiteSpreadLayout=
+KrohnkiteStackedLayout=
+KrohnkiteStairLayout=
+KrohnkiteTileLayout=Meta+T
+KrohnkiteToggleFloat=Meta+F
+KrohnkiteTreeColumnLayout=
+KrohnkitegrowWidth=Meta+Ctrl+L
+KrohnkitetoggleDock=
 Move Tablet to Next LogicalOutput=
 MoveMouseToCenter=Meta+F6
 MoveMouseToFocus=Meta+F5
@@ -139,7 +195,7 @@ MoveZoomLeft=
 MoveZoomRight=
 MoveZoomUp=
 Overview=Meta+W
-PoloniumActivateAbove=Meta+K
+PoloniumActivateAbove=
 PoloniumActivateBelow=Meta+J
 PoloniumActivateLeft=Meta+H
 PoloniumActivateRight=
@@ -218,8 +274,8 @@ Walk Through Windows=Meta+Tab; Alt+Tab
 Walk Through Windows (Reverse)=Meta+Shift+Tab; Alt+Shift+Tab
 Walk Through Windows Alternative=
 Walk Through Windows Alternative (Reverse)=
-Walk Through Windows of Current Application=Alt+`; Meta+`
-Walk Through Windows of Current Application (Reverse)=Meta+~; Alt+~
+Walk Through Windows of Current Application=Meta+`; Alt+`
+Walk Through Windows of Current Application (Reverse)=Alt+~; Meta+~
 Walk Through Windows of Current Application Alternative=
 Walk Through Windows of Current Application Alternative (Reverse)=
 Window Above Other Windows=
@@ -323,6 +379,18 @@ seekforwardmedia=Media Fast Forward
 seekforwardmedialong=
 stopmedia=Media Stop
 
+[net.local.vicinae-2.desktop][Global Shortcuts]
+_launch=Meta+V
+
+[net.local.vicinae-3.desktop][Global Shortcuts]
+_launch=Meta+;; Meta+,
+
+[net.local.vicinae-4.desktop][Global Shortcuts]
+_launch=Meta+E
+
+[net.local.vicinae.desktop][Global Shortcuts]
+_launch=Meta+Space; Alt+Space
+
 [org.kde.dolphin.desktop][Global Shortcuts]
 _launch=Meta+F
 
@@ -339,7 +407,7 @@ RunClipboard=
 _launch=
 
 [org.kde.kscreen.desktop][Global Shortcuts]
-ShowOSD=Display; Meta+P
+ShowOSD=Meta+P; Display
 
 [org.kde.plasma-systemmonitor.desktop][Global Shortcuts]
 _launch=Meta+Esc
@@ -361,12 +429,12 @@ RecordScreen=Meta+Alt+R
 RecordWindow=Meta+Ctrl+R
 RectangularRegionScreenShot=Meta+Shift+Print
 WindowUnderCursorScreenShot=Meta+Ctrl+Print
-_launch=Print; Meta+Shift+S
+_launch=Meta+Shift+S; Print
 
 [org.kde.touchpadshortcuts.desktop][Global Shortcuts]
 DisableTouchpad=Touchpad Off
 EnableTouchpad=Touchpad On
-ToggleTouchpad=Meta+Ctrl+Zenkaku Hankaku; Meta+Ctrl+Touchpad Toggle; Touchpad Toggle
+ToggleTouchpad=Meta+Ctrl+Touchpad Toggle; Touchpad Toggle; Meta+Ctrl+Zenkaku Hankaku
 
 [org.mozilla.firefox.desktop][Global Shortcuts]
 _launch=Meta+B
@@ -415,13 +483,13 @@ previous activity=Meta+Shift+A
 repeat_action=
 show dashboard=Ctrl+F12
 show-barcode=
-show-on-mouse-pos=Meta+V
+show-on-mouse-pos=
 switch to next activity=
 switch to previous activity=
 toggle do not disturb=
 
 [systemsettings.desktop][Global Shortcuts]
-_launch=Tools; Meta+I
+_launch=Meta+I; Tools
 kcm-kscreen=
 kcm-lookandfeel=
 kcm-powerdevilprofilesconfig=
