@@ -1,18 +1,6 @@
 [ActivityManager][Global Shortcuts]
 switch-to-activity-e64a0ad0-557c-4a55-9c97-96f7144d9b67=
 
-[Custom Commands][net.local.powermenu.sh.desktop]
-Exec=~/.config/rofi/powermenu.sh
-Name=powermenu
-
-[Custom Commands][net.local.rofi-2.desktop]
-Exec=rofi -show filebrowser
-Name=rofi file
-
-[Custom Commands][net.local.rofi.desktop]
-Exec=rofi -show drun
-Name=rofi app launcher
-
 [KDE Keyboard Layout Switcher][Global Shortcuts]
 Switch to Last-Used Keyboard Layout=Meta+Alt+L
 Switch to Next Keyboard Layout=Meta+Alt+K
@@ -103,7 +91,7 @@ Zoom=
 ZoomIn=Ctrl+=; Ctrl++
 ZoomOut=Ctrl+-
 
-[foot.desktop][Global Shortcuts]
+[com.mitchellh.ghostty.desktop][Global Shortcuts]
 _launch=Ctrl+Alt+T; Meta+Return
 
 [kaccess][Global Shortcuts]
@@ -334,15 +322,6 @@ seekbackwardmedialong=
 seekforwardmedia=Media Fast Forward
 seekforwardmedialong=
 stopmedia=Media Stop
-
-[net.local.powermenu.sh.desktop][Global Shortcuts]
-_launch=Meta+Shift+E
-
-[net.local.rofi-2.desktop][Global Shortcuts]
-_launch=Meta+E
-
-[net.local.rofi.desktop][Global Shortcuts]
-_launch=Alt+Space; Meta+Space
 
 [org.kde.dolphin.desktop][Global Shortcuts]
 _launch=Meta+F

@@ -28,11 +28,17 @@ run_step "Install Rust toolchain" \
 # ---------------------------------------------
 # Terminal + launcher
 # ---------------------------------------------
-run_step "Install Foot" \
-"sudo dnf install -y foot"
+run_step "Enable Ghostty COPR" \
+"sudo dnf copr enable -y scottames/ghostty"
+
+run_step "Install Ghostty" \
+"sudo dnf install -y ghostty"
+
+run_step "Enable Vicinae COPR" \
+"sudo dnf copr enable -y quadratech188/vicinae"
 
 run_step "Install Vicinae" \
-"curl -fsSL https://vicinae.com/install | bash"
+"sudo dnf install -y vicinae"
 
 run_step "Enable Vicinae user service" \
 "systemctl --user enable --now vicinae.service"

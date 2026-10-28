@@ -22,8 +22,8 @@
    },
    "theme": {
       "dark": {
-         "name": "gruvbox-dark",
-         "icon_theme": "yet-another-monochrome-icon-set"
+         "name": "libadwaita-dark",
+         "icon_theme": "Kaze-dark"
       }
    },
    "telemetry": {
@@ -31,11 +31,16 @@
    },
    "launcher_window": {
       "rounding": 0,
-      "opacity": 0.8,
+      "opacity": 0.7,
       "client_side_decorations": {
+         "enabled": true,
          "border_width": 1
       },
       "compact_mode": {
+         "enabled": true
+      },
+      "floating_status_bar": false,
+      "layer_shell": {
          "enabled": false
       },
       "material": "blur"
