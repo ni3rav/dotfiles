@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=vicinae vicinae://launch/clipboard/history
+Name=vicinae clipboard
+NoDisplay=true
+StartupNotify=false
+Type=Application
+X-KDE-GlobalAccel-CommandShortcut=true
