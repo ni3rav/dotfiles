@@ -1,0 +1,139 @@
+{
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+  "manifest_version": 3,
+  "version": "1.0",
+  "name": "gleipnir · Kanagawa Wave",
+  "description": "Deep ink-blue Kanagawa Wave palette for Chrome.",
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "theme": {
+    "colors": {
+      "frame": [
+        24,
+        24,
+        32
+      ],
+      "toolbar": [
+        31,
+        31,
+        40
+      ],
+      "toolbar_text": [
+        220,
+        215,
+        186
+      ],
+      "background_tab": [
+        24,
+        24,
+        32
+      ],
+      "background_tab_text": [
+        114,
+        113,
+        105
+      ],
+      "tab_text": [
+        220,
+        215,
+        186
+      ],
+      "bookmark_text": [
+        220,
+        215,
+        186
+      ],
+      "toolbar_button_icon": [
+        126,
+        156,
+        216
+      ],
+      "omnibox_background": [
+        54,
+        54,
+        70
+      ],
+      "omnibox_text": [
+        220,
+        215,
+        186
+      ],
+      "ntp_background": [
+        31,
+        31,
+        40
+      ],
+      "ntp_text": [
+        220,
+        215,
+        186
+      ],
+      "ntp_link": [
+        126,
+        156,
+        216
+      ],
+      "ntp_header": [
+        149,
+        127,
+        184
+      ],
+      "button_background": [
+        24,
+        24,
+        32
+      ],
+      "frame_inactive": [
+        24,
+        24,
+        32
+      ],
+      "frame_incognito": [
+        24,
+        24,
+        32
+      ],
+      "frame_incognito_inactive": [
+        24,
+        24,
+        32
+      ],
+      "background_tab_inactive": [
+        24,
+        24,
+        32
+      ],
+      "background_tab_text_inactive": [
+        114,
+        113,
+        105
+      ],
+      "tab_background_text": [
+        114,
+        113,
+        105
+      ]
+    },
+    "tints": {
+      "frame": [
+        -1,
+        -1,
+        -1
+      ],
+      "frame_inactive": [
+        -1,
+        -1,
+        -1
+      ],
+      "buttons": [
+        0.12,
+        0.7,
+        0.7
+      ]
+    }
+  }
+}

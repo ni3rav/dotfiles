@@ -246,19 +246,118 @@ elif cmd == "set-gtk-name":
     write_text(rc, text)
 
 elif cmd == "accent-from-colors":
+    sections = {}
     section = ""
-    found = ""
-    for line in Path(sys.argv[2]).read_text().splitlines():
-        stripped = line.strip()
+    for raw in Path(sys.argv[2]).read_text().splitlines():
+        stripped = raw.strip()
         if stripped.startswith("[") and stripped.endswith("]"):
             section = stripped[1:-1]
-        elif section == "Colors:Selection" and stripped.startswith("BackgroundNormal="):
-            found = stripped.split("=", 1)[1]
+            continue
+        if "=" not in stripped or not section:
+            continue
+        key, value = stripped.split("=", 1)
+        parts = []
+        for piece in value.split(",")[:3]:
+            piece = piece.strip()
+            if not piece.lstrip("-").isdigit():
+                parts = []
+                break
+            parts.append(int(piece))
+        if len(parts) == 3:
+            sections.setdefault(section, {})[key] = tuple(parts)
+
+    def channel(value: float) -> float:
+        value = value / 255
+        if value <= 0.04045:
+            return value / 12.92
+        return ((value + 0.055) / 1.055) ** 2.4
+
+    def luminance(rgb: tuple[int, int, int]) -> float:
+        return 0.2126 * channel(rgb[0]) + 0.7152 * channel(rgb[1]) + 0.0722 * channel(rgb[2])
+
+    def contrast(one: tuple[int, int, int], other: tuple[int, int, int]) -> float:
+        dark, light = sorted((luminance(one), luminance(other)))
+        return (light + 0.05) / (dark + 0.05)
+
+    def hsl(rgb: tuple[int, int, int]) -> tuple[float, float, float]:
+        red, green, blue = (c / 255 for c in rgb)
+        hi, lo = max(red, green, blue), min(red, green, blue)
+        light = (hi + lo) / 2
+        if hi == lo:
+            return 0.0, 0.0, light
+        delta = hi - lo
+        sat = delta / (1 - abs(2 * light - 1))
+        if hi == red:
+            hue = ((green - blue) / delta) % 6
+        elif hi == green:
+            hue = (blue - red) / delta + 2
+        else:
+            hue = (red - green) / delta + 4
+        return hue * 60, sat, light
+
+    def rgb_from(hue: float, sat: float, light: float) -> tuple[int, int, int]:
+        chroma = (1 - abs(2 * light - 1)) * sat
+        mixed = chroma * (1 - abs((hue / 60) % 2 - 1))
+        match = light - chroma / 2
+        hue = hue % 360
+        if hue < 60:
+            red, green, blue = chroma, mixed, 0
+        elif hue < 120:
+            red, green, blue = mixed, chroma, 0
+        elif hue < 180:
+            red, green, blue = 0, chroma, mixed
+        elif hue < 240:
+            red, green, blue = 0, mixed, chroma
+        elif hue < 300:
+            red, green, blue = mixed, 0, chroma
+        else:
+            red, green, blue = chroma, 0, mixed
+        return tuple(round((c + match) * 255) for c in (red, green, blue))
+
+    backgrounds = []
+    for name in ("Colors:Window", "Colors:View"):
+        rgb = sections.get(name, {}).get("BackgroundNormal")
+        if rgb:
+            backgrounds.append(rgb)
+    if not backgrounds:
+        backgrounds = [(0, 0, 0)]
+
+    def readable(rgb: tuple[int, int, int]) -> bool:
+        return all(contrast(rgb, bg) >= 4.5 for bg in backgrounds)
+
+    roles = (
+        ("Colors:Selection", "BackgroundNormal"),
+        ("Colors:Window", "DecorationFocus"),
+        ("Colors:View", "DecorationFocus"),
+        ("Colors:Button", "DecorationFocus"),
+        ("Colors:View", "ForegroundLink"),
+        ("Colors:Window", "ForegroundLink"),
+        ("Colors:Selection", "ForegroundLink"),
+        ("Colors:Button", "ForegroundLink"),
+    )
+    chosen = None
+    for name, key in roles:
+        rgb = sections.get(name, {}).get(key)
+        if rgb and readable(rgb):
+            chosen = rgb
             break
-    if not found:
-        sys.exit("selection color was not found")
-    parts = [int(part.strip()) for part in found.split(",")]
-    print("#{:02x}{:02x}{:02x}".format(*parts[:3]))
+    if chosen is None:
+        chosen = sections.get("Colors:Selection", {}).get("BackgroundNormal")
+        if chosen is None:
+            sys.exit("selection color was not found")
+        hue, sat, _light = hsl(chosen)
+        best = chosen
+        best_gap = min(contrast(chosen, bg) for bg in backgrounds)
+        for step in range(5, 96):
+            candidate = rgb_from(hue, sat, step / 100)
+            gap = min(contrast(candidate, bg) for bg in backgrounds)
+            if gap > best_gap:
+                best, best_gap = candidate, gap
+            if gap >= 4.5:
+                best = candidate
+                break
+        chosen = best
+    print("#{:02x}{:02x}{:02x}".format(*chosen))
 
 elif cmd == "vsix-theme":
     label = ""
@@ -294,14 +393,6 @@ PY
 conf_value() {
   local file=$1 key=$2
   awk -F= -v key="$key" '$1 == key { sub(/^[^=]*=/, ""); print; exit }' "$file"
-}
-
-scheme_name() {
-  awk '
-    /^\[General\]/ { in_general = 1; next }
-    /^\[/ { in_general = 0 }
-    in_general && /^Name=/ { print substr($0, 6); exit }
-  ' "$1"
 }
 
 list_themes() {
@@ -452,7 +543,7 @@ apply_theme() {
   local name=$1
   local dir=$THEMES/$name
   local conf=$dir/theme.conf
-  local accent ghostty colors scheme wallpaper wall out=""
+  local accent ghostty colors scheme wallpaper wall fresh="" out=""
   [[ -f $conf ]] || { note "no theme.conf in $name"; return 1; }
 
   accent=$(conf_value "$conf" accent)
@@ -462,10 +553,12 @@ apply_theme() {
 
   colors=$(find "$dir" -maxdepth 1 -name '*.colors' | sort | head -n 1)
   if [[ -n $colors ]]; then
-    scheme=$(scheme_name "$colors")
+    fresh=$(py accent-from-colors "$colors") || fresh=""
+    [[ -n $fresh ]] && accent=$fresh
+    scheme=$(basename "$colors" .colors)
     if mkdir -p "$HOME/.local/share/color-schemes" \
-      && cp -a "$colors" "$HOME/.local/share/color-schemes/$(basename "$colors")"; then
-      if [[ -n $scheme ]] && out=$(plasma-apply-colorscheme "$scheme" 2>&1); then
+      && cp -a "$colors" "$HOME/.local/share/color-schemes/$scheme.colors"; then
+      if out=$(plasma-apply-colorscheme "$scheme" 2>&1); then
         note "kde colors: $scheme"
       else
         note "kde colors: saved $(basename "$colors"), plasma did not apply ${scheme:-the scheme}"
@@ -547,40 +640,12 @@ choose_theme() {
   read -r -p "  theme: " choice || exit 0
   if [[ $choice =~ ^[0-9]+$ ]] && (( choice >= 1 && choice <= ${#themes[@]} )); then
     echo
-    local preview_file=""
-    preview_file=$(find_preview "$THEMES/${themes[$((choice - 1))]}" || true)
-    show_preview "$preview_file"
     apply_theme "${themes[$((choice - 1))]}"
   else
     note "no theme selected"
   fi
   echo
   pause
-}
-
-find_preview() {
-  local dir=$1 file
-  [[ -d $dir ]] || return 1
-  shopt -s nullglob nocaseglob
-  for file in "$dir"/preview.png "$dir"/preview.jpg "$dir"/preview.jpeg "$dir"/preview.webp; do
-    printf '%s\n' "$file"
-    shopt -u nocaseglob
-    return 0
-  done
-  shopt -u nocaseglob
-  return 1
-}
-
-show_preview() {
-  local file=$1 payload term=${TERM:-}
-  [[ -n $file && -f $file ]] || { note "no preview image"; return 0; }
-  if [[ $term == *ghostty* || $term == *kitty* || -n ${KITTY_WINDOW_ID:-} || -n ${GHOSTTY_RESOURCES_DIR:-} ]]; then
-    payload=$(printf '%s' "$file" | base64 -w 0) || true
-    if [[ -n $payload ]]; then
-      printf '\033_Ga=T,t=f,c=48;%s\033\\\n' "$payload"
-    fi
-  fi
-  note "preview: $file"
 }
 
 apply_gtk() {
@@ -745,7 +810,7 @@ copy_images() {
 }
 
 create_theme() {
-  local name accent="" ghostty="" vicinae_name="" vscode_label="" colors="" preview="" gtk="" firefox="" helium=""
+  local name accent="" ghostty="" vicinae_name="" vscode_label="" colors="" gtk="" firefox="" helium=""
   local dir gtk_name="" file toml
   local -a vicinae_files=() wall_files=()
 
@@ -777,8 +842,6 @@ create_theme() {
   fi
   note "wallpapers. cancel to skip"
   mapfile -t wall_files < <(pick_files "Wallpapers" "*.png *.jpg *.jpeg *.webp|Images" || true)
-  note "preview image. cancel to skip"
-  preview=$(pick_file "Preview image" "*.png *.jpg *.jpeg *.webp|Images" || true)
   note "gtk theme folder. cancel to skip"
   gtk=$(pick_dir "GTK theme" || true)
   note "vscode theme vsix. cancel to skip"
@@ -826,9 +889,6 @@ create_theme() {
     for file in "${wall_files[@]}"; do
       cp -a "$file" "$dir/wallpapers/" || { note "could not copy a wallpaper"; pause; return; }
     done
-  fi
-  if [[ -n $preview ]]; then
-    cp -a "$preview" "$dir/preview.${preview##*.}" || { note "could not copy the preview"; pause; return; }
   fi
   if [[ -d $gtk ]]; then
     mkdir -p "$dir/gtk" || { note "could not create the gtk folder"; pause; return; }

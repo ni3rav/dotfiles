@@ -152,7 +152,7 @@
   "@azure.argTenant": "",
   "workbench.editor.empty.hint": "hidden",
   "chat.agentsControl.enabled": false,
-  "workbench.colorTheme": "Andromeda Night Italic",
+  "workbench.colorTheme": "Kanagawa",
   "chat.viewSessions.orientation": "stacked",
   "window.autoDetectColorScheme": true,
   "workbench.iconTheme": "bearded-icons",
