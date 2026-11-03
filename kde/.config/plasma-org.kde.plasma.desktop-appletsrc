@@ -20,7 +20,7 @@ DialogHeight=1026
 DialogWidth=1920
 
 [Containments][1][Wallpaper][org.kde.image][General]
-Image=file:///home/nirav/dotfiles/extra/themes/kanagawa-wave/wallpapers/wallpaper.png
+Image=file:///home/nirav/dotfiles/extra/themes/tokyo-night/wallpapers/5-oma-cityscape.jpg
 SlidePaths=/usr/share/wallpapers/
 
 [Containments][27]
@@ -183,7 +183,7 @@ plugin=org.kde.plasma.folder
 wallpaperplugin=org.kde.image
 
 [Containments][53][Wallpaper][org.kde.image][General]
-Image=file:///home/nirav/dotfiles/extra/themes/kanagawa-wave/wallpapers/wallpaper.png
+Image=file:///home/nirav/dotfiles/extra/themes/tokyo-night/wallpapers/5-oma-cityscape.jpg
 
 [Containments27Appletsts][52][Configuration][General]
 configurationOverrides={"overrides":{},"associations":[]}

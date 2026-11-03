@@ -7,12 +7,12 @@ add_newline = true
 format = "$directory$character"
 
 [character]
-success_symbol = "[❯](bold #7fb4ca)"
-error_symbol = "[❯](bold #7fb4ca)"
-vimcmd_symbol = "[❮](bold #7fb4ca)"
+success_symbol = "[❯](bold #7aa2f7)"
+error_symbol = "[❯](bold #7aa2f7)"
+vimcmd_symbol = "[❮](bold #7aa2f7)"
 
 [directory]
-style = "bold #7fb4ca"
+style = "bold #7aa2f7"
 format = "[$path]($style) "
 truncation_length = 3
 truncate_to_repo = false

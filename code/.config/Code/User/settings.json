@@ -152,7 +152,7 @@
   "@azure.argTenant": "",
   "workbench.editor.empty.hint": "hidden",
   "chat.agentsControl.enabled": false,
-  "workbench.colorTheme": "Kanagawa",
+  "workbench.colorTheme": "Tokyo Night",
   "chat.viewSessions.orientation": "stacked",
   "window.autoDetectColorScheme": true,
   "workbench.iconTheme": "bearded-icons",
@@ -166,6 +166,6 @@
   "go.toolsManagement.autoUpdate": true,
   "python.analysis.typeCheckingMode": "standard",
   "network.meteredConnection": "off",
-  "workbench.preferredDarkColorTheme": "Min Darkest",
+  "workbench.preferredDarkColorTheme": "Tokyo Night",
   "window.menuBarVisibility": "compact",
 }
